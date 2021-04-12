@@ -18,7 +18,7 @@ int getRandomPosition()
     return getRandomNumber(minValue, maxValue);
 }
 
-void addValue2ToRandomPositionOnTable(int table[TABLE_SIZE][TABLE_SIZE])
+void addValueToRandomPositionOnTable(int table[TABLE_SIZE][TABLE_SIZE], int value)
 {
     int isOccupied = 0;
     do
@@ -28,7 +28,7 @@ void addValue2ToRandomPositionOnTable(int table[TABLE_SIZE][TABLE_SIZE])
         int c = randomPosition % TABLE_SIZE;
         isOccupied = table[l][c];
         if(!isOccupied){
-            table[l][c] = 2;
+            table[l][c] = value;
         }
     } while (isOccupied);
 }
@@ -51,7 +51,7 @@ int main()
     srand(time(NULL));
     int table[TABLE_SIZE][TABLE_SIZE] = {0};
 
-    addValue2ToRandomPositionOnTable(table);
+    addValueToRandomPositionOnTable(table, 4);
     printTable(table);
     printf("\n\n");
     
