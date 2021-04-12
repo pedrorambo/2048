@@ -131,25 +131,23 @@ int applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE]){
     return compareTables(previousTable, table);
 }
 
+void addInitialPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE]){
+    for(int i = 0; i < 2; i++){
+        addValueToRandomPositionOnTable(table, 2);
+    }
+}
+
+void addPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE]){
+    int pieceValue = 2;
+    if(getRandomBooleanByChance(10)) pieceValue = 4;
+    addValueToRandomPositionOnTable(table, pieceValue);
+}
+
 int main()
 {
     srand(time(NULL));
     int table[TABLE_SIZE][TABLE_SIZE] = {0};
 
-    //addValueToRandomPositionOnTable(table, 2);
-    //addValueToRandomPositionOnTable(table, 2);
-
-    table[0][3] = 0;
-    table[1][3] = 0;
-    table[2][3] = 2;
-    table[3][3] = 8;
 
     printTable(table);
-
-    int changed = applyDownMovement(table);
-
-    printTable(table);
-    printf("Changed: %d\n", changed);
-
-    printf("Hello, world!");
 }
