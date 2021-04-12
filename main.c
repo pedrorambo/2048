@@ -179,7 +179,7 @@ int main()
 
     printf("Rotaciona:\n");
     rotateClockwise(table);
-    rotateClockwise(table);
+    rotateClockwise(table);//eae 
     rotateClockwise(table);
     printTable(table);
 }
