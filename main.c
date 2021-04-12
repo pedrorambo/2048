@@ -74,7 +74,27 @@ void applyDownGravity(int table[TABLE_SIZE][TABLE_SIZE]){
     }
 }
 
+void applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE]){
+    for(int i = 0; i < TABLE_SIZE; i++){
+        applyDownGravity(table);
+    }
 
+    for (int l = (TABLE_SIZE - 1); l > 0; l--)
+    {
+        for (int c = 0; c < TABLE_SIZE; c++)
+        {
+            int upValue = table[(l - 1)][c];
+            if(upValue != 0 && upValue == table[l][c]){
+                table[(l - 1)][c] = 0;
+                table[l][c] *= 2;
+            }
+        }
+    }
+
+    for(int i = 0; i < TABLE_SIZE; i++){
+        applyDownGravity(table);
+    }
+}
 
 int main()
 {
@@ -84,19 +104,18 @@ int main()
     addValueToRandomPositionOnTable(table, 2);
     addValueToRandomPositionOnTable(table, 2);
 
+    table[0][3] = 2;
+    table[1][3] = 2;
+    table[2][3] = 2;
+
+    printTable(table);
+
+    applyDownMovement(table);
+
+    printTable(table);
+
     //TODO Executar gravirt TAMANHO/2 vezes
 
-    printTable(table);
-
-    applyDownGravity(table);
-    printTable(table);
-
-    applyDownGravity(table);
-    printTable(table);
-
-    applyDownGravity(table);
-    printTable(table);
-    
 
     printf("Hello, world!");
 }
