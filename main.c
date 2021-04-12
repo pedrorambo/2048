@@ -74,7 +74,35 @@ void applyDownGravity(int table[TABLE_SIZE][TABLE_SIZE]){
     }
 }
 
-void applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE]){
+void copyTable(int incoming[TABLE_SIZE][TABLE_SIZE], int outcoming[TABLE_SIZE][TABLE_SIZE])
+{
+    for (int l = 0; l < TABLE_SIZE; l++)
+    {
+        for (int c = 0; c < TABLE_SIZE; c++)
+        {
+            outcoming[l][c] = incoming[l][c];
+        }
+    }
+}
+
+int compareTables(int table1[TABLE_SIZE][TABLE_SIZE], int table2[TABLE_SIZE][TABLE_SIZE])
+{   
+    for (int l = 0; l < TABLE_SIZE; l++)
+    {
+        for (int c = 0; c < TABLE_SIZE; c++)
+        {
+            if(table1[l][c] != table2[l][c]){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+int applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE]){
+    int previousTable[TABLE_SIZE][TABLE_SIZE] = {0};
+    copyTable(table, previousTable);
+
     for(int i = 0; i < TABLE_SIZE; i++){
         applyDownGravity(table);
     }
@@ -94,6 +122,8 @@ void applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE]){
     for(int i = 0; i < TABLE_SIZE; i++){
         applyDownGravity(table);
     }
+
+    return compareTables(previousTable, table);
 }
 
 int main()
@@ -101,21 +131,20 @@ int main()
     srand(time(NULL));
     int table[TABLE_SIZE][TABLE_SIZE] = {0};
 
-    addValueToRandomPositionOnTable(table, 2);
-    addValueToRandomPositionOnTable(table, 2);
+    //addValueToRandomPositionOnTable(table, 2);
+    //addValueToRandomPositionOnTable(table, 2);
 
-    table[0][3] = 2;
-    table[1][3] = 2;
+    table[0][3] = 0;
+    table[1][3] = 0;
     table[2][3] = 2;
+    table[3][3] = 8;
 
     printTable(table);
 
-    applyDownMovement(table);
+    int changed = applyDownMovement(table);
 
     printTable(table);
-
-    //TODO Executar gravirt TAMANHO/2 vezes
-
+    printf("Changed: %d\n", changed);
 
     printf("Hello, world!");
 }
