@@ -46,14 +46,57 @@ void printTable(int table[TABLE_SIZE][TABLE_SIZE])
     printf("\n");
 }
 
+void printLine(int line[TABLE_SIZE])
+{
+    for (int l = 0; l < TABLE_SIZE; l++)
+    {
+        printf("%3d ", line[l]);
+    }
+    printf("\n");
+}
+
+void getTableLine(int line[TABLE_SIZE], int table[TABLE_SIZE][TABLE_SIZE], int lineIndex){
+    for(int i = 0; i < TABLE_SIZE; i++){
+        line[i] = table[lineIndex][i];
+    }
+}
+
+void applyDownGravity(int table[TABLE_SIZE][TABLE_SIZE]){
+    for (int l = 1; l < TABLE_SIZE; l++)
+    {
+        for (int c = 0; c < TABLE_SIZE; c++)
+        {
+            if(table[(l - 1)][c] != 0 && table[l][c] == 0){
+                table[l][c] = table[(l - 1)][c];
+                table[(l - 1)][c] = 0;
+            }
+        }
+    }
+}
+
+
+
 int main()
 {
     srand(time(NULL));
     int table[TABLE_SIZE][TABLE_SIZE] = {0};
 
-    addValueToRandomPositionOnTable(table, 4);
+    addValueToRandomPositionOnTable(table, 2);
+    addValueToRandomPositionOnTable(table, 2);
+
+    //TODO Executar gravirt TAMANHO/2 vezes
+
     printTable(table);
-    printf("\n\n");
+
+    applyDownGravity(table);
+    printTable(table);
+
+    applyDownGravity(table);
+    printTable(table);
+
+    applyDownGravity(table);
+    printTable(table);
     
+
     printf("Hello, world!");
 }
