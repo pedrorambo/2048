@@ -143,11 +143,43 @@ void addPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE]){
     addValueToRandomPositionOnTable(table, pieceValue);
 }
 
+void rotateClockwise(int a[TABLE_SIZE][TABLE_SIZE])
+{
+    for (int l = 0; l < TABLE_SIZE / 2; l++) {
+        for (int c = l; c < TABLE_SIZE - l - 1; c++) {
+            int temp = a[l][c];
+            a[l][c] = a[TABLE_SIZE - 1 - c][l];
+            a[TABLE_SIZE - 1 - c][l] = a[TABLE_SIZE - 1 - l][TABLE_SIZE - 1 - c];
+            a[TABLE_SIZE - 1 - l][TABLE_SIZE - 1 - c] = a[c][TABLE_SIZE - 1 - l];
+            a[c][TABLE_SIZE - 1 - l] = temp;
+        }
+    }
+}
+
 int main()
 {
     srand(time(NULL));
     int table[TABLE_SIZE][TABLE_SIZE] = {0};
 
+    table[1][0] = 2;
+    table[1][1] = 2;
+    table[3][0] = 8;
 
+    printTable(table);
+
+    // Apply right movement
+
+    printf("Rotaciona:\n");
+    rotateClockwise(table);
+    printTable(table);
+
+    printf("Gravidade:\n");
+    applyDownMovement(table);
+    printTable(table);
+
+    printf("Rotaciona:\n");
+    rotateClockwise(table);
+    rotateClockwise(table);
+    rotateClockwise(table);
     printTable(table);
 }
