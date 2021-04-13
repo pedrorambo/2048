@@ -5,31 +5,35 @@
 #include "lib/prints.h"
 #include "lib/utils.h"
 #include "lib/tableLogic.h"
+#include "lib/tablePlays.h"
 
 int main()
 {
     srand(time(NULL));
     int table[TABLE_SIZE][TABLE_SIZE] = {0};
+    int changed = 0;
 
-    table[1][0] = 2;
-    table[1][1] = 2;
-    table[3][0] = 8;
-
+    // Init game
+    addInitialPiecesToTable(table);
     printTable(table);
 
-    // Apply right movement
-
-    printf("Rotaciona:\n");
-    rotateClockwise(table);
+    changed = playDown(table);
     printTable(table);
+    printf("Changed: %d\n", changed);
 
-    printf("Gravidade:\n");
-    applyDownMovement(table);
+    changed = playLeft(table);
     printTable(table);
+    printf("Changed: %d\n", changed);
 
-    printf("Rotaciona:\n");
-    rotateClockwise(table);
-    rotateClockwise(table);//eae 
-    rotateClockwise(table);
+    changed = playUp(table);
     printTable(table);
+    printf("Changed: %d\n", changed);
+
+    changed = playRight(table);
+    printTable(table);
+    printf("Changed: %d\n", changed);
+
+    changed = playRight(table);
+    printTable(table);
+    printf("Changed: %d\n", changed);
 }
