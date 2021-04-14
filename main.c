@@ -17,4 +17,35 @@ int main(void)
 	initView();
 	addInitialPiecesToTable(table);
 	drawTable(table);
+
+	while (TRUE)
+	{
+		int key = getNextKey();
+
+		switch (key)
+		{
+		case 66: // Down
+			playDown(table);
+			addPiecesToTable(table);
+			drawTable(table);
+			break;
+		case 65: // Up
+			playUp(table);
+			addPiecesToTable(table);
+			drawTable(table);
+			break;
+		case 68: // Left
+			playLeft(table);
+			addPiecesToTable(table);
+			drawTable(table);
+			break;
+		case 67: // Right
+			playRight(table);
+			addPiecesToTable(table);
+			drawTable(table);
+			break;
+		default:
+			break;
+		}
+	}
 }

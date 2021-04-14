@@ -45,8 +45,8 @@ void initView()
 {
     initscr();
     start_color();
-    noecho();
     keypad(stdscr, TRUE);
+    noecho();
 
     init_pair(1, COLOR_BLACK, COLOR_YELLOW);
     init_pair(2, COLOR_BLACK, COLOR_RED);
@@ -55,13 +55,15 @@ void initView()
     wrefresh(win);
 }
 
-void getNextKey()
+int getNextKey()
 {
-    int ch = getch();
+    int ch = wgetch(win);
 
-    // wmove(win, 0, 0);
-    // wprintw(win, "%d ", ch);
-    // wrefresh(win);
+    wmove(win, 0, 42);
+    wprintw(win, "Tecla: %d ", ch);
+    wrefresh(win);
+
+    return ch;
 }
 
 void destroyView()
