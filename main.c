@@ -25,23 +25,23 @@ int main(void)
 		switch (key)
 		{
 		case 66: // Down
-			playDown(table);
-			addPiecesToTable(table);
+			if (playDown(table) != 0)
+				addPiecesToTable(table);
 			drawTable(table);
 			break;
 		case 65: // Up
-			playUp(table);
-			addPiecesToTable(table);
+			if (playUp(table) != 0)
+				addPiecesToTable(table);
 			drawTable(table);
 			break;
 		case 68: // Left
-			playLeft(table);
-			addPiecesToTable(table);
+			if (playLeft(table) != 0)
+				addPiecesToTable(table);
 			drawTable(table);
 			break;
 		case 67: // Right
-			playRight(table);
-			addPiecesToTable(table);
+			if (playRight(table) != 0)
+				addPiecesToTable(table);
 			drawTable(table);
 			break;
 		default:
