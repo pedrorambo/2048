@@ -11,6 +11,9 @@ void setColorByValue(WINDOW *win, int value)
 {
     switch (value)
     {
+    case 0:
+        wattron(win, COLOR_PAIR(21));
+        break;
     case 2:
         wattron(win, COLOR_PAIR(10));
         break;
@@ -46,7 +49,6 @@ void setColorByValue(WINDOW *win, int value)
         break;
 
     default:
-
         wattron(win, COLOR_PAIR(1));
         break;
     }
@@ -54,10 +56,7 @@ void setColorByValue(WINDOW *win, int value)
 
 void drawBlockPiece(WINDOW *win, int y, int x, int value)
 {
-   setColorByValue(win, value);
-
-    if (value == 0)
-        return;
+    setColorByValue(win, value);
 
     for (int l = x; l < (x + 5); l++)
     {
@@ -67,6 +66,9 @@ void drawBlockPiece(WINDOW *win, int y, int x, int value)
             waddch(win, ' ');
         }
     }
+
+    if (value == 0)
+        return;
 
     wmove(win, (x + 2), (y + 3));
     wprintw(win, "%4d", value);
@@ -96,7 +98,7 @@ void initView()
 
     init_color(COLOR_BLACK, 0, 0, 0);
     init_color(10, 933, 894, 854); //2-white
-    init_color(11, 933, 882, 788);//4-cream-white
+    init_color(11, 933, 882, 788); //4-cream-white
     init_color(12, 952, 698, 478); //8-orange
     init_color(13, 964, 588, 392); //16-orange
     init_color(14, 968, 486, 372); //32-red
@@ -106,6 +108,7 @@ void initView()
     init_color(18, 929, 823, 474); //512-yellow
     init_color(19, 929, 772, 247); //1024-yellow
     init_color(20, 556, 266, 678); //2048-purple
+    init_color(21, 188, 188, 188); //empty-piece-dark-grey
 
     init_pair(1, COLOR_BLACK, COLOR_YELLOW);
     init_pair(2, COLOR_BLACK, 20); //testbench
@@ -120,6 +123,7 @@ void initView()
     init_pair(18, COLOR_BLACK, 18);
     init_pair(19, COLOR_BLACK, 19);
     init_pair(20, COLOR_BLACK, 20);
+    init_pair(21, COLOR_BLACK, 21);
 
     win = newwin(100, 100, 0, 0);
     wrefresh(win);
