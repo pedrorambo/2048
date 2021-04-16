@@ -14,7 +14,8 @@ void printTable(int table[TABLE_SIZE][TABLE_SIZE])
     printf("\n");
 }
 
-void printLine(int line[TABLE_SIZE]){
+void printLine(int line[TABLE_SIZE])
+{
     for (int l = 0; l < TABLE_SIZE; l++)
     {
         printf("%3d ", line[l]);

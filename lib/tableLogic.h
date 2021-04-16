@@ -10,9 +10,9 @@ void applyDownGravity(int[TABLE_SIZE][TABLE_SIZE]);
 
 void copyTable(int[TABLE_SIZE][TABLE_SIZE], int[TABLE_SIZE][TABLE_SIZE]);
 
-int compareTables(int [TABLE_SIZE][TABLE_SIZE], int[TABLE_SIZE][TABLE_SIZE]);
+int compareTables(int[TABLE_SIZE][TABLE_SIZE], int[TABLE_SIZE][TABLE_SIZE]);
 
-int applyDownMovement(int [TABLE_SIZE][TABLE_SIZE]);
+int applyDownMovement(int[TABLE_SIZE][TABLE_SIZE]);
 
 void addInitialPiecesToTable(int[TABLE_SIZE][TABLE_SIZE]);
 
