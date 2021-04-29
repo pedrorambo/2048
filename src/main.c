@@ -5,6 +5,7 @@
 #include <tableLogic.h>
 #include <tablePlays.h>
 #include <view.h>
+#include <keys.h>
 
 int main(void)
 {
@@ -20,22 +21,22 @@ int main(void)
 
         switch (key)
         {
-        case 66: // Down
+        case INPUT_KEY_DOWN:
             if (playDown(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
             break;
-        case 65: // Up
+        case INPUT_KEY_UP:
             if (playUp(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
             break;
-        case 68: // Left
+        case INPUT_KEY_LEFT:
             if (playLeft(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
             break;
-        case 67: // Right
+        case INPUT_KEY_RIGHT:
             if (playRight(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);

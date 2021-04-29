@@ -2,6 +2,12 @@
 #include <config.h>
 #include <utils.h>
 
+#define INITIAL_PIECES_QUANTITY 2
+#define INITIAL_PIECES_VALUE 2
+
+#define SECONDARY_PIECE_CHANCE 10
+#define SECONDARY_PIECE_VALUE 4
+
 int getRandomPosition()
 {
     int minValue = 0;
@@ -108,31 +114,31 @@ int applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE])
 
 void addInitialPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE])
 {
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < INITIAL_PIECES_QUANTITY; i++)
     {
-        addValueToRandomPositionOnTable(table, 2);
+        addValueToRandomPositionOnTable(table, INITIAL_PIECES_VALUE);
     }
 }
 
 void addPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE])
 {
-    int pieceValue = 2;
-    if (getRandomBooleanByChance(10))
-        pieceValue = 4;
+    int pieceValue = INITIAL_PIECES_VALUE;
+    if (getRandomBooleanByChance(SECONDARY_PIECE_CHANCE))
+        pieceValue = SECONDARY_PIECE_VALUE;
     addValueToRandomPositionOnTable(table, pieceValue);
 }
 
-void rotateClockwise(int a[TABLE_SIZE][TABLE_SIZE])
+void rotateClockwise(int table[TABLE_SIZE][TABLE_SIZE])
 {
     for (int l = 0; l < TABLE_SIZE / 2; l++)
     {
         for (int c = l; c < TABLE_SIZE - l - 1; c++)
         {
-            int temp = a[l][c];
-            a[l][c] = a[TABLE_SIZE - 1 - c][l];
-            a[TABLE_SIZE - 1 - c][l] = a[TABLE_SIZE - 1 - l][TABLE_SIZE - 1 - c];
-            a[TABLE_SIZE - 1 - l][TABLE_SIZE - 1 - c] = a[c][TABLE_SIZE - 1 - l];
-            a[c][TABLE_SIZE - 1 - l] = temp;
+            int pieceValue = table[l][c];
+            table[l][c] = table[TABLE_SIZE - 1 - c][l];
+            table[TABLE_SIZE - 1 - c][l] = table[TABLE_SIZE - 1 - l][TABLE_SIZE - 1 - c];
+            table[TABLE_SIZE - 1 - l][TABLE_SIZE - 1 - c] = table[c][TABLE_SIZE - 1 - l];
+            table[c][TABLE_SIZE - 1 - l] = pieceValue;
         }
     }
 }

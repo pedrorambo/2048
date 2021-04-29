@@ -5,6 +5,33 @@
 #include <tableLogic.h>
 #include <tablePlays.h>
 
+#define TABLE_WINDOW_WIDTH 100
+#define TABLE_WINDOW_HEIGHT 100
+#define TABLE_WINDOW_X 0
+#define TABLE_WINDOW_Y 0
+
+#define PIECE_WIDTH 10
+#define PIECE_HEIGHT 5
+
+#define PIECE_TEXT_OFFSET_X 2
+#define PIECE_TEXT_OFFSET_Y 3
+
+#define SHOW_CURSOR 0
+
+#define VIEW_COLOR_BLACK 30
+#define VIEW_COLOR_WHITE 10         // piece 2
+#define VIEW_COLOR_DARK_WHITE 11    // piece 4
+#define VIEW_COLOR_ORANGE 12        // piece 8
+#define VIEW_COLOR_DARK_ORANGE 13   // piece 16
+#define VIEW_COLOR_RED 14           // piece 32
+#define VIEW_COLOR_DARK_RED 15      // piece 64
+#define VIEW_COLOR_LIGHT_YELLOW 16  // piece 128
+#define VIEW_COLOR_YELLOW 17        // piece 256
+#define VIEW_COLOR_DARK_YELLOW 18   // piece 512
+#define VIEW_COLOR_DARKER_YELLOW 19 // piece 1024
+#define VIEW_COLOR_PURPLE 20        // piece 2048
+#define VIEW_COLOR_GREY 21
+
 WINDOW *win = NULL;
 
 void setColorByValue(WINDOW *win, int value)
@@ -12,44 +39,43 @@ void setColorByValue(WINDOW *win, int value)
     switch (value)
     {
     case 0:
-        wattron(win, COLOR_PAIR(21));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_GREY));
         break;
     case 2:
-        wattron(win, COLOR_PAIR(10));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_WHITE));
         break;
     case 4:
-        wattron(win, COLOR_PAIR(11));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_DARK_WHITE));
         break;
     case 8:
-        wattron(win, COLOR_PAIR(12));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_ORANGE));
         break;
     case 16:
-        wattron(win, COLOR_PAIR(13));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_DARK_ORANGE));
         break;
     case 32:
-        wattron(win, COLOR_PAIR(14));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_RED));
         break;
     case 64:
-        wattron(win, COLOR_PAIR(15));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_DARK_RED));
         break;
     case 128:
-        wattron(win, COLOR_PAIR(16));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_LIGHT_YELLOW));
         break;
     case 256:
-        wattron(win, COLOR_PAIR(17));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_YELLOW));
         break;
     case 512:
-        wattron(win, COLOR_PAIR(18));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_DARK_YELLOW));
         break;
     case 1024:
-        wattron(win, COLOR_PAIR(19));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_DARKER_YELLOW));
         break;
     case 2048:
-        wattron(win, COLOR_PAIR(20));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_PURPLE));
         break;
-
     default:
-        wattron(win, COLOR_PAIR(1));
+        wattron(win, COLOR_PAIR(VIEW_COLOR_BLACK));
         break;
     }
 }
@@ -58,9 +84,9 @@ void drawBlockPiece(WINDOW *win, int y, int x, int value)
 {
     setColorByValue(win, value);
 
-    for (int l = x; l < (x + 5); l++)
+    for (int l = x; l < (x + PIECE_HEIGHT); l++)
     {
-        for (int c = y; c < (y + 10); c++)
+        for (int c = y; c < (y + PIECE_WIDTH); c++)
         {
             wmove(win, l, c);
             waddch(win, ' ');
@@ -70,7 +96,7 @@ void drawBlockPiece(WINDOW *win, int y, int x, int value)
     if (value == 0)
         return;
 
-    wmove(win, (x + 2), (y + 3));
+    wmove(win, (x + PIECE_TEXT_OFFSET_X), (y + PIECE_TEXT_OFFSET_Y));
     wprintw(win, "%4d", value);
 }
 
@@ -82,10 +108,40 @@ void drawTable(int table[TABLE_SIZE][TABLE_SIZE])
     {
         for (int c = 0; c < TABLE_SIZE; c++)
         {
-            drawBlockPiece(win, (c * 10), (l * 5), table[l][c]);
+            drawBlockPiece(win, (c * PIECE_WIDTH), (l * PIECE_HEIGHT), table[l][c]);
         }
     }
     wrefresh(win);
+}
+
+void initColors()
+{
+    init_color(VIEW_COLOR_BLACK, 0, 0, 0);
+    init_color(VIEW_COLOR_WHITE, 933, 894, 854);
+    init_color(VIEW_COLOR_DARK_WHITE, 933, 882, 788);
+    init_color(VIEW_COLOR_ORANGE, 952, 698, 478);
+    init_color(VIEW_COLOR_DARK_ORANGE, 964, 588, 392);
+    init_color(VIEW_COLOR_RED, 968, 486, 372);
+    init_color(VIEW_COLOR_DARK_RED, 968, 372, 231);
+    init_color(VIEW_COLOR_LIGHT_YELLOW, 929, 815, 450);
+    init_color(VIEW_COLOR_YELLOW, 929, 800, 380);
+    init_color(VIEW_COLOR_DARK_YELLOW, 929, 823, 474);
+    init_color(VIEW_COLOR_DARKER_YELLOW, 929, 772, 247);
+    init_color(VIEW_COLOR_PURPLE, 556, 266, 678);
+    init_color(VIEW_COLOR_GREY, 188, 188, 188);
+
+    init_pair(VIEW_COLOR_WHITE, COLOR_BLACK, VIEW_COLOR_WHITE);
+    init_pair(VIEW_COLOR_DARK_WHITE, COLOR_BLACK, VIEW_COLOR_DARK_WHITE);
+    init_pair(VIEW_COLOR_ORANGE, COLOR_BLACK, VIEW_COLOR_ORANGE);
+    init_pair(VIEW_COLOR_DARK_ORANGE, COLOR_BLACK, VIEW_COLOR_DARK_ORANGE);
+    init_pair(VIEW_COLOR_RED, COLOR_BLACK, VIEW_COLOR_RED);
+    init_pair(VIEW_COLOR_DARK_RED, COLOR_BLACK, VIEW_COLOR_DARK_RED);
+    init_pair(VIEW_COLOR_LIGHT_YELLOW, COLOR_BLACK, VIEW_COLOR_LIGHT_YELLOW);
+    init_pair(VIEW_COLOR_YELLOW, COLOR_BLACK, VIEW_COLOR_YELLOW);
+    init_pair(VIEW_COLOR_DARK_YELLOW, COLOR_BLACK, VIEW_COLOR_DARK_YELLOW);
+    init_pair(VIEW_COLOR_DARKER_YELLOW, COLOR_BLACK, VIEW_COLOR_DARKER_YELLOW);
+    init_pair(VIEW_COLOR_PURPLE, COLOR_BLACK, VIEW_COLOR_PURPLE);
+    init_pair(VIEW_COLOR_GREY, COLOR_BLACK, VIEW_COLOR_GREY);
 }
 
 void initView()
@@ -94,38 +150,9 @@ void initView()
     start_color();
     keypad(stdscr, TRUE);
     noecho();
-    curs_set(0);
-
-    init_color(COLOR_BLACK, 0, 0, 0);
-    init_color(10, 933, 894, 854); //2-white
-    init_color(11, 933, 882, 788); //4-cream-white
-    init_color(12, 952, 698, 478); //8-orange
-    init_color(13, 964, 588, 392); //16-orange
-    init_color(14, 968, 486, 372); //32-red
-    init_color(15, 968, 372, 231); //64-red
-    init_color(16, 929, 815, 450); //128-yellow
-    init_color(17, 929, 800, 380); //256-yellow
-    init_color(18, 929, 823, 474); //512-yellow
-    init_color(19, 929, 772, 247); //1024-yellow
-    init_color(20, 556, 266, 678); //2048-purple
-    init_color(21, 188, 188, 188); //empty-piece-dark-grey
-
-    init_pair(1, COLOR_BLACK, COLOR_YELLOW);
-    init_pair(2, COLOR_BLACK, 20); //testbench
-    init_pair(10, COLOR_BLACK, 10);
-    init_pair(11, COLOR_BLACK, 11);
-    init_pair(12, COLOR_BLACK, 12);
-    init_pair(13, COLOR_BLACK, 13);
-    init_pair(14, COLOR_BLACK, 14);
-    init_pair(15, COLOR_BLACK, 15);
-    init_pair(16, COLOR_BLACK, 16);
-    init_pair(17, COLOR_BLACK, 17);
-    init_pair(18, COLOR_BLACK, 18);
-    init_pair(19, COLOR_BLACK, 19);
-    init_pair(20, COLOR_BLACK, 20);
-    init_pair(21, COLOR_BLACK, 21);
-
-    win = newwin(100, 100, 0, 0);
+    curs_set(SHOW_CURSOR);
+    initColors();
+    win = newwin(TABLE_WINDOW_WIDTH, TABLE_WINDOW_HEIGHT, TABLE_WINDOW_X, TABLE_WINDOW_Y);
     wrefresh(win);
 }
 
@@ -133,6 +160,7 @@ int getNextKey()
 {
     int ch = wgetch(win);
 
+    // FIXME Debug
     wmove(win, 0, 42);
     wprintw(win, "Tecla: %d ", ch);
     wrefresh(win);
