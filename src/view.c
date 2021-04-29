@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
-#include "../config.h"
-#include "tableLogic.h"
-#include "tablePlays.h"
+#include <config.h>
+#include <tableLogic.h>
+#include <tablePlays.h>
 
 WINDOW *win = NULL;
 

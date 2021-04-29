@@ -1,4 +1,4 @@
-#include "../config.h"
+#include <config.h>
 
 void printTable(int[TABLE_SIZE][TABLE_SIZE]);
 

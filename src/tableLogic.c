@@ -1,6 +1,6 @@
 #include <math.h>
-#include "../config.h"
-#include "utils.h"
+#include <config.h>
+#include <utils.h>
 
 int getRandomPosition()
 {

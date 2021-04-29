@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../config.h"
+#include <config.h>
 
 void printTable(int table[TABLE_SIZE][TABLE_SIZE])
 {

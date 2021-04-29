@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ncurses.h>
-#include "config.h"
-#include "lib/tableLogic.h"
-#include "lib/tablePlays.h"
-#include "lib/view.h"
+#include <config.h>
+#include <tableLogic.h>
+#include <tablePlays.h>
+#include <view.h>
 
 int main(void)
 {

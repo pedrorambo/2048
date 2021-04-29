@@ -1,5 +1,5 @@
-#include "../config.h"
-#include "tableLogic.h"
+#include <config.h>
+#include <tableLogic.h>
 
 int playUp(int table[TABLE_SIZE][TABLE_SIZE])
 {

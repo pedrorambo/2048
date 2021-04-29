@@ -1,4 +1,4 @@
-#include "../config.h"
+#include <config.h>
 
 int playUp(int[TABLE_SIZE][TABLE_SIZE]);
 int playDown(int[TABLE_SIZE][TABLE_SIZE]);
