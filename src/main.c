@@ -5,6 +5,7 @@
 #include <tableLogic.h>
 #include <core.h>
 #include <view.h>
+#include <tableView.h>
 
 #ifndef KEY_ESC
 #define KEY_ESC 27
@@ -12,17 +13,18 @@
 
 int main(void)
 {
-    t_tableData tableData;
-    srand(time(NULL));
-    initView();
     int key;
+    t_tableData tableData;
+    WINDOW *window = initView();
 
+    srand(time(NULL));
     initGame(&tableData);
-    drawTable(tableData.table);
+
+    renderTable(window, &tableData);
 
     do
     {
-        key = getNextKey();
+        key = getNextKey(window);
 
         switch (key)
         {
@@ -42,7 +44,7 @@ int main(void)
             break;
         }
 
-        drawTable(tableData.table);
+        renderTable(window, &tableData);
     } while (key != KEY_ESC);
 
     destroyView();
