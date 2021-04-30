@@ -131,10 +131,13 @@ void initView()
 
 int getNextKey()
 {
+    keypad(win, TRUE);
+    cbreak();
+    noecho();
     int ch = wgetch(win);
 
     wmove(win, 0, 42);
-    wprintw(win, "Tecla: %d ", ch);
+    wprintw(win, "Tecla: %i ", ch);
     wrefresh(win);
 
     return ch;

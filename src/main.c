@@ -5,6 +5,7 @@
 #include <tableLogic.h>
 #include <tablePlays.h>
 #include <view.h>
+#define KEY_ESC 27
 
 int main(void)
 {
@@ -13,35 +14,40 @@ int main(void)
     initView();
     addInitialPiecesToTable(table);
     drawTable(table);
+    int key;
+    
 
-    while (TRUE)
+    do
     {
-        int key = getNextKey();
+        key = getNextKey();
+        
 
-        switch (key)
-        {
-        case 66: // Down
+        
+        if (key == KEY_DOWN){ // Down
+        
             if (playDown(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
-            break;
-        case 65: // Up
+        }
+        else if (key == KEY_UP){ // Up
             if (playUp(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
-            break;
-        case 68: // Left
+        }
+        else if (key == KEY_LEFT){ // Left
             if (playLeft(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
-            break;
-        case 67: // Right
+            }
+        else if (key == KEY_RIGHT){ // Right
             if (playRight(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
-            break;
-        default:
-            break;
         }
-    }
+        
+      
+    }while (key != KEY_ESC);
+    
+    destroyView();
+    return 0;
 }
