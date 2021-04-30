@@ -1,4 +1,4 @@
-build: src/*
+build: src/* src/include/*
 	rm -rf build
 	mkdir -p build
 
