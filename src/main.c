@@ -14,35 +14,40 @@ int main(void)
     initView();
     addInitialPiecesToTable(table);
     drawTable(table);
+    int key;
 
-    while (TRUE)
+    do
     {
-        int key = getNextKey();
+        key = getNextKey();
 
-        switch (key)
+        if (key == KEY_DOWN)
         {
-        case INPUT_KEY_DOWN:
+
             if (playDown(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
-            break;
-        case INPUT_KEY_UP:
+        }
+        else if (key == KEY_UP)
+        {
             if (playUp(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
-            break;
-        case INPUT_KEY_LEFT:
+        }
+        else if (key == KEY_LEFT)
+        {
             if (playLeft(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
-            break;
-        case INPUT_KEY_RIGHT:
+        }
+        else if (key == KEY_RIGHT)
+        {
             if (playRight(table) != 0)
                 addPiecesToTable(table);
             drawTable(table);
-            break;
-        default:
-            break;
         }
-    }
+
+    } while (key != KEY_ESC);
+
+    destroyView();
+    return 0;
 }

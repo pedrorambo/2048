@@ -13,3 +13,7 @@
 #ifndef INPUT_KEY_RIGHT
 #define INPUT_KEY_RIGHT 67
 #endif
+
+#ifndef KEY_ESC 2
+#define KEY_ESC 27
+#endif

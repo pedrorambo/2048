@@ -158,11 +158,15 @@ void initView()
 
 int getNextKey()
 {
+    //FIXME Documentar
+    keypad(win, TRUE);
+    cbreak();
+    noecho();
     int ch = wgetch(win);
 
-    // FIXME Debug
+    //FIXME Debug
     wmove(win, 0, 42);
-    wprintw(win, "Tecla: %d ", ch);
+    wprintw(win, "Tecla: %i ", ch);
     wrefresh(win);
 
     return ch;
