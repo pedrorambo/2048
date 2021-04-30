@@ -21,21 +21,22 @@ int main(void)
     {
         key = getNextKey();
 
-        if (key == KEY_DOWN)
+        switch (key)
         {
+        case KEY_DOWN:
             playDown(&tableData);
-        }
-        else if (key == KEY_UP)
-        {
+            break;
+        case KEY_UP:
             playUp(&tableData);
-        }
-        else if (key == KEY_LEFT)
-        {
-            playLeft(&tableData);
-        }
-        else if (key == KEY_RIGHT)
-        {
+            break;
+        case KEY_RIGHT:
             playRight(&tableData);
+            break;
+        case KEY_LEFT:
+            playLeft(&tableData);
+            break;
+        default:
+            break;
         }
 
         drawTable(tableData.table);
