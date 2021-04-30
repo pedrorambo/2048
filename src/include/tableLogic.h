@@ -12,7 +12,7 @@ void copyTable(int[TABLE_SIZE][TABLE_SIZE], int[TABLE_SIZE][TABLE_SIZE]);
 
 int compareTables(int[TABLE_SIZE][TABLE_SIZE], int[TABLE_SIZE][TABLE_SIZE]);
 
-int applyDownMovement(int[TABLE_SIZE][TABLE_SIZE]);
+int applyDownMovement(int[TABLE_SIZE][TABLE_SIZE], int *score);
 
 void addInitialPiecesToTable(int[TABLE_SIZE][TABLE_SIZE]);
 

@@ -81,7 +81,7 @@ int compareTables(int table1[TABLE_SIZE][TABLE_SIZE], int table2[TABLE_SIZE][TAB
     return 0;
 }
 
-int applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE])
+int applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE], int *score)
 {
     int previousTable[TABLE_SIZE][TABLE_SIZE] = {0};
     copyTable(table, previousTable);
@@ -100,6 +100,7 @@ int applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE])
             {
                 table[(l - 1)][c] = 0;
                 table[l][c] *= 2;
+                *score += upValue * 2;
             }
         }
     }

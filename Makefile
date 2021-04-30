@@ -4,7 +4,7 @@ build: src/* src/include/*
 
 	gcc -Wall -Wextra -Wpedantic \
 	-o build/main \
-	src/main.c src/prints.c src/utils.c src/tableLogic.c src/tablePlays.c src/view.c \
+	src/main.c src/prints.c src/utils.c src/tableLogic.c src/core.c src/view.c \
 	-lncurses \
 	-I src/include
 

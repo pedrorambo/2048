@@ -10,6 +10,7 @@
     // the values you've explicitly set, above.
     "editor.detectIndentation": false,
     "files.associations": {
-        "tablelogic.h": "c"
+        "tablelogic.h": "c",
+        "core.h": "c"
     }
 }

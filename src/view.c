@@ -3,7 +3,6 @@
 #include <ncurses.h>
 #include <config.h>
 #include <tableLogic.h>
-#include <tablePlays.h>
 
 #define TABLE_WINDOW_WIDTH 100
 #define TABLE_WINDOW_HEIGHT 100
@@ -158,16 +157,16 @@ void initView()
 
 int getNextKey()
 {
+    // //FIXME Debug
+    // wmove(win, 0, 42);
+    // wprintw(win, "Score: %d ", *score);
+    // wrefresh(win);
+
     //FIXME Documentar
     keypad(win, TRUE);
     cbreak();
     noecho();
     int ch = wgetch(win);
-
-    //FIXME Debug
-    wmove(win, 0, 42);
-    wprintw(win, "Tecla: %i ", ch);
-    wrefresh(win);
 
     return ch;
 }
