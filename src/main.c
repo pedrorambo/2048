@@ -5,7 +5,10 @@
 #include <tableLogic.h>
 #include <core.h>
 #include <view.h>
-#include <keys.h>
+
+#ifndef KEY_ESC
+#define KEY_ESC 27
+#endif
 
 int main(void)
 {
