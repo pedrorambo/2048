@@ -17,6 +17,7 @@
 #include <saveGame.h>
 #include <promptSaveView.h>
 #include <promptExitView.h>
+#include <promptNewView.h>
 
 void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
 {
@@ -37,6 +38,8 @@ void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int cur
     case WINDOW_PROMPT_EXIT:
         renderPromptExit(window);
         break;
+    case WINDOW_PROMPT_NEW:
+        renderPromptNew(window);
     default:
         break;
     }
@@ -64,8 +67,7 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
             playLeft(tableData);
             break;
         case GAME_KEY_N:
-            flushData(tableData);
-            addInitialPieces(tableData);
+            *currentWindow = WINDOW_PROMPT_NEW;
             break;
         case 'r':
             *currentWindow = WINDOW_PROMPT_RANKING;
@@ -114,6 +116,18 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         if (key == GAME_KEY_S || key == GAME_KEY_S_UPPERCASE)
         {
             tableData->exit = TRUE;
+        }
+        else
+        {
+            *currentWindow = WINDOW_GAME;
+        }
+        break;
+    case WINDOW_PROMPT_NEW:
+        if (key == GAME_KEY_S || key == GAME_KEY_S_UPPERCASE)
+        {
+            flushData(tableData);
+            addInitialPieces(tableData);
+            *currentWindow = WINDOW_GAME;
         }
         else
         {
