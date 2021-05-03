@@ -55,22 +55,19 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         switch (key)
         {
         case KEY_DOWN:
-            playDown(tableData);
+            playDown(tableData, 0);
             break;
         case KEY_UP:
-            playUp(tableData);
+            playUp(tableData, 0);
             break;
         case KEY_RIGHT:
-            playRight(tableData);
+            playRight(tableData, 0);
             break;
         case KEY_LEFT:
-            playLeft(tableData);
+            playLeft(tableData, 0);
             break;
         case GAME_KEY_N:
             *currentWindow = WINDOW_PROMPT_NEW;
-            break;
-        case 'r':
-            *currentWindow = WINDOW_PROMPT_RANKING;
             break;
         case GAME_KEY_S:
             *currentWindow = WINDOW_PROMPT_SAVE;
@@ -82,7 +79,12 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         }
         break;
     case WINDOW_PROMPT_RANKING:
-        if (key == KEY_BACKSPACE)
+        if (key == KEY_ENTER || key == GAME_KEY_ENTER)
+        {
+            addPlayerToRanking(tableData);
+            *currentWindow = WINDOW_ENDGAME_RANKING;
+        }
+        else if (key == KEY_BACKSPACE)
         {
             tableData->username[strlen(tableData->username) - 1] = '\0';
         }
@@ -90,13 +92,9 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         {
             tableData->username[strlen(tableData->username)] = key;
         }
-        else if (key == KEY_ENTER || key == GAME_KEY_ENTER)
-        {
-            addPlayerToRanking(tableData);
-            *currentWindow = WINDOW_ENDGAME_RANKING;
-        }
         break;
     case WINDOW_ENDGAME_RANKING:
+        tableData->exit = 1;
         break;
     case WINDOW_PROMPT_SAVE:
         if (key == KEY_BACKSPACE)
@@ -110,6 +108,7 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         else if (key == KEY_ENTER || key == GAME_KEY_ENTER)
         {
             saveGame(tableData, tableData->filename);
+            *currentWindow = WINDOW_GAME;
         }
         break;
     case WINDOW_PROMPT_EXIT:
@@ -157,10 +156,17 @@ int main()
         addInitialPieces(&tableData);
 
     loadRanking(&tableData);
+
+    // tableData.table[0][0] = 1024;
+    // tableData.table[0][1] = 1024;
+
     renderTable(window, &tableData);
 
     do
     {
+        if (tableData.gameFinished)
+            currentWindow = WINDOW_PROMPT_RANKING;
+
         handleWindow(window, &tableData, currentWindow);
 
         key = getNextKey(window);
