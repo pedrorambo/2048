@@ -12,7 +12,7 @@ build: src/* src/include/*
 	src/core.c \
 	src/view.c \
 	src/tableView.c \
-	src/rankingPersistence.c \
+	src/ranking.c \
 	src/promptView.c \
 	src/promptRankingView.c \
 	\

@@ -7,7 +7,7 @@
 #include <core.h>
 #include <view.h>
 #include <tableView.h>
-#include <rankingPersistence.h>
+#include <ranking.h>
 #include <promptView.h>
 #include <keys.h>
 #include <windows.h>
@@ -80,7 +80,7 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
     }
 }
 
-int main(void)
+int main()
 {
     int key;
     t_tableData tableData = {0};
@@ -92,15 +92,6 @@ int main(void)
 
     // Load ranking
     loadRanking(&tableData);
-
-    // Ranking Mock
-    // strcpy(tableData.ranking[0].name, "Pedro 1");
-    // tableData.ranking[0].score = 40;
-    // strcpy(tableData.ranking[1].name, "Pedro 2");
-    // tableData.ranking[1].score = 10;
-    // strcpy(tableData.ranking[2].name, "Pedro 3");
-    // tableData.ranking[2].score = 90;
-    // tableData.rankingSize = 3;
 
     renderTable(window, &tableData);
 

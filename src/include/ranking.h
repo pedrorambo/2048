@@ -5,7 +5,7 @@
 
 #define FILE_NAME "ranking.bin"
 
-void saveRanking(t_tableData *);
 void loadRanking(t_tableData *);
+void addPlayerToRanking(t_tableData *tableData);
 
 #endif
