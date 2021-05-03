@@ -11,7 +11,7 @@ void saveGame(t_tableData *tableData, char *filename)
     t_saveData saveData = {0};
     saveData.movements = tableData->movements;
     saveData.score = tableData->score;
-    copyTable(tableData, saveData.table);
+    copyTable(tableData->table, saveData.table);
 
     FILE *file;
     file = fopen(filename, "w");
