@@ -10,11 +10,63 @@
 #include <rankingPersistence.h>
 #include <promptView.h>
 #include <keys.h>
+#include <windows.h>
+
+void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
+{
+    switch (currentWindow)
+    {
+    case WINDOW_PROMPT_SAVE:
+        renderPrompt(window);
+        break;
+    case WINDOW_GAME:
+        renderTable(window, tableData);
+        break;
+    default:
+        break;
+    }
+}
+
+void handleInput(t_tableData *tableData, const int key, unsigned int *currentWindow)
+{
+    switch (*currentWindow)
+    {
+    case WINDOW_HOME:
+        break;
+    case WINDOW_GAME:
+        switch (key)
+        {
+        case KEY_DOWN:
+            playDown(tableData);
+            break;
+        case KEY_UP:
+            playUp(tableData);
+            break;
+        case KEY_RIGHT:
+            playRight(tableData);
+            break;
+        case KEY_LEFT:
+            playLeft(tableData);
+            break;
+        case KEY_NEWGAME:
+            *currentWindow = WINDOW_PROMPT_SAVE;
+            break;
+        default:
+            break;
+        }
+        break;
+    case WINDOW_PROMPT_SAVE:
+        break;
+    default:
+        break;
+    }
+}
 
 int main(void)
 {
     int key;
     t_tableData tableData;
+    unsigned int currentWindow = WINDOW_GAME;
     WINDOW *window = initView();
 
     srand(time(NULL));
@@ -36,34 +88,10 @@ int main(void)
 
     do
     {
+        handleWindow(window, &tableData, currentWindow);
+
         key = getNextKey(window);
-
-        switch (key)
-        {
-        case KEY_DOWN:
-            playDown(&tableData);
-            renderTable(window, &tableData);
-            break;
-        case KEY_UP:
-            playUp(&tableData);
-            renderTable(window, &tableData);
-            break;
-        case KEY_RIGHT:
-            playRight(&tableData);
-            renderTable(window, &tableData);
-            break;
-        case KEY_LEFT:
-            playLeft(&tableData);
-            renderTable(window, &tableData);
-            break;
-        case KEY_NEWGAME:
-            renderPrompt(window);
-            initGame(&tableData);
-
-        default:
-            break;
-        }
-
+        handleInput(&tableData, key, &currentWindow);
     } while (key != KEY_ESC);
 
     destroyView();
