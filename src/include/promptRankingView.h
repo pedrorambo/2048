@@ -5,5 +5,6 @@
 #define PROMPT_RANKING_VIEW_H
 
 void renderPromptRanking(WINDOW *window, t_tableData *tableData);
+void drawHud(WINDOW *window);
 
 #endif

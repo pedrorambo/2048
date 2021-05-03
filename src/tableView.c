@@ -100,5 +100,6 @@ void renderTable(WINDOW *window, t_tableData *tableData)
     wclear(window);
     drawTable(window, tableData->table);
     drawStats(window, tableData);
+    drawHud(window, tableData);
     wrefresh(window);
 }

@@ -20,3 +20,11 @@ void renderPromptRanking(WINDOW *window, t_tableData *tableData)
     drawPromptRanking(window, tableData->username);
     wrefresh(window);
 }
+
+void drawHud(WINDOW *window)
+{
+    drawString(window, "Comandos", 42, 16, 24, 1, VIEW_COLOR_LIGHT_GREY);
+    drawString(window, "N - Novo Jogo", 42, 17, 24, 1, VIEW_COLOR_GREY);
+    drawString(window, "S - Salvar Jogo", 42, 18, 24, 1, VIEW_COLOR_GREY);
+    drawString(window, "ESC - Sair do Jogo", 42, 19, 24, 1, VIEW_COLOR_GREY);
+}
