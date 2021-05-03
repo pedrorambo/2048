@@ -2,7 +2,7 @@
 #include <tableLogic.h>
 #include <core.h>
 
-void initGame(t_tableData *tableData)
+void flushData(t_tableData *tableData)
 {
     for (int l = 0; l < TABLE_SIZE; l++)
     {
@@ -14,7 +14,10 @@ void initGame(t_tableData *tableData)
 
     tableData->score = 0;
     tableData->movements = 0;
+}
 
+void addInitialPieces(t_tableData *tableData)
+{
     addInitialPiecesToTable(tableData->table);
 }
 

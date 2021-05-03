@@ -17,6 +17,7 @@ build: src/* src/include/*
 	src/promptRankingView.c \
 	src/rankingView.c \
 	src/logFile.c \
+	src/saveGame.c \
 	\
 	-lncurses \
 	-I src/include

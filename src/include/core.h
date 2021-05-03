@@ -23,6 +23,7 @@ void playUp(t_tableData *);
 void playDown(t_tableData *);
 void playLeft(t_tableData *);
 void playRight(t_tableData *);
-void initGame(t_tableData *);
+void flushData(t_tableData *tableData);
+void addInitialPieces(t_tableData *tableData);
 
 #endif

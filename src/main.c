@@ -15,6 +15,7 @@
 #include <rankingView.h>
 #include <logFile.h>
 #include <promptRankingView.h>
+#include <saveGame.h>
 
 void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
 {
@@ -62,9 +63,8 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
             *currentWindow = WINDOW_PROMPT_SAVE;
             break;
         case GAME_KEY_S:
-            *currentWindow = WINDOW_PROMPT_RANKING;
-        default:
-            break;
+            // *currentWindow = WINDOW_PROMPT_RANKING;
+            saveGame(tableData, "output");
         }
         break;
     case WINDOW_PROMPT_SAVE:
@@ -94,15 +94,21 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
 int main()
 {
     int key;
+    int gameLoaded = 0;
     t_tableData tableData = {0};
-    unsigned int currentWindow = WINDOW_GAME;
-    WINDOW *window = initView();
 
     srand(time(NULL));
-    initGame(&tableData);
+    unsigned int currentWindow = WINDOW_GAME;
+    WINDOW *window = initView();
+    flushData(&tableData);
+
+    gameLoaded = loadGame(&tableData, "output");
+    logInt("Loaded: ", gameLoaded);
+
+    if (!gameLoaded)
+        addInitialPieces(&tableData);
 
     loadRanking(&tableData);
-
     renderTable(window, &tableData);
 
     do
