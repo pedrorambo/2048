@@ -12,6 +12,7 @@ int main()
 {
     int key;
     int gameLoaded = 0;
+    int once = 0;
     t_tableData tableData = {0};
 
     srand(time(NULL));
@@ -31,8 +32,11 @@ int main()
 
     do
     {
-        if (tableData.gameFinished)
+        if (tableData.gameFinished && !once)
+        {
             currentWindow = WINDOW_PROMPT_RANKING;
+            once = 1;
+        }
 
         handleWindow(window, &tableData, currentWindow);
 
