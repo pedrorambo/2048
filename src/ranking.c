@@ -23,45 +23,6 @@ int playerRanked(t_tableData *tableData)
     return 0;
 }
 
-void addPlayerToRanking(t_tableData *tableData)
-{
-    int playerIndex = -1;
-    t_user user = {0};
-    user.score = tableData->score;
-    strcpy(user.name, tableData->username);
-
-    sortRanking(tableData);
-
-    playerIndex = indexOfPlayer(tableData);
-    if (playerIndex >= 0)
-    {
-        if (tableData->score > tableData->ranking[playerIndex].score)
-            tableData->ranking[playerIndex].score = tableData->score;
-    }
-    else
-    {
-        int rankingIsFull = tableData->rankingSize >= RANKING_SIZE;
-        if (rankingIsFull)
-        {
-            if (playerRanked)
-            {
-                int index = tableData->rankingSize;
-                tableData->ranking[index] = user;
-                tableData->rankingSize = index;
-            }
-        }
-        else
-        {
-            int index = tableData->rankingSize;
-            tableData->ranking[index] = user;
-            tableData->rankingSize = index + 1;
-        }
-    }
-
-    sortRanking(tableData);
-    saveRanking(tableData);
-}
-
 void sortRanking(t_tableData *tableData)
 {
     t_user tempUser = {0};
@@ -113,4 +74,43 @@ void loadRanking(t_tableData *tableData)
     }
 
     tableData->rankingSize = rankingSize;
+}
+
+void addPlayerToRanking(t_tableData *tableData)
+{
+    int playerIndex = -1;
+    t_user user = {0};
+    user.score = tableData->score;
+    strcpy(user.name, tableData->username);
+
+    sortRanking(tableData);
+
+    playerIndex = indexOfPlayer(tableData);
+    if (playerIndex >= 0)
+    {
+        if (tableData->score > tableData->ranking[playerIndex].score)
+            tableData->ranking[playerIndex].score = tableData->score;
+    }
+    else
+    {
+        int rankingIsFull = tableData->rankingSize >= RANKING_SIZE;
+        if (rankingIsFull)
+        {
+            if (playerRanked(tableData))
+            {
+                int index = tableData->rankingSize;
+                tableData->ranking[index] = user;
+                tableData->rankingSize = index;
+            }
+        }
+        else
+        {
+            int index = tableData->rankingSize;
+            tableData->ranking[index] = user;
+            tableData->rankingSize = index + 1;
+        }
+    }
+
+    sortRanking(tableData);
+    saveRanking(tableData);
 }
