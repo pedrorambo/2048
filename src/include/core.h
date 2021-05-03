@@ -5,9 +5,17 @@
 
 typedef struct
 {
+    int score;
+    char name[USERNAME_MAX_LENGTH];
+} t_user;
+
+typedef struct
+{
     int table[TABLE_SIZE][TABLE_SIZE];
     int score;
     int movements;
+    t_user ranking[RANKING_SIZE];
+    int rankingSize;
 } t_tableData;
 
 void playUp(t_tableData *);
