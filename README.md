@@ -1,19 +1,17 @@
 # 2048
 
-## Compilar e rodar o projeto
+## Dependências
 
-### Somente compilação
+### Ncurses, GCC e Make
+
+Comando para instalação com apt-get: `sudo apt-get install gcc make libncurses5-dev libncursesw5-dev`.
+
+## Compilação e Execução
+
+### Compilaçao
 
 Execute o comando `make` na raiz do projeto.
 
-### Shell script para compilar e rodar o projeto (recomendado para desenvolvimento)
+### Execução
 
-Dê permissão de execução ao arquivo `run.sh` com `chmod +x run.sh`.
-
-Execute `./run.sh`.
-
-## Dependências
-
-### Ncurses
-
-Comando para instalação com apt-get: `sudo apt-get install libncurses5-dev libncursesw5-dev`
+Após compilado o projeto, dê permissão de execução ao arquivo gerado `sudo chmod +x ./build/2048`. Após isso, execute o programa `./build/2048`.
