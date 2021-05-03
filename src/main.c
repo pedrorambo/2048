@@ -8,10 +8,8 @@
 #include <view.h>
 #include <tableView.h>
 #include <rankingPersistence.h>
-
-#ifndef KEY_ESC
-#define KEY_ESC 27
-#endif
+#include <promptView.h>
+#include <keys.h>
 
 int main(void)
 {
@@ -44,21 +42,28 @@ int main(void)
         {
         case KEY_DOWN:
             playDown(&tableData);
+            renderTable(window, &tableData);
             break;
         case KEY_UP:
             playUp(&tableData);
+            renderTable(window, &tableData);
             break;
         case KEY_RIGHT:
             playRight(&tableData);
+            renderTable(window, &tableData);
             break;
         case KEY_LEFT:
             playLeft(&tableData);
+            renderTable(window, &tableData);
             break;
+        case KEY_NEWGAME:
+            renderPrompt(window);
+            initGame(&tableData);
+
         default:
             break;
         }
 
-        renderTable(window, &tableData);
     } while (key != KEY_ESC);
 
     destroyView();

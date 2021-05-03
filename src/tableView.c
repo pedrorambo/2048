@@ -2,20 +2,12 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <string.h>
+
 #include <config.h>
 #include <tableLogic.h>
 #include <view.h>
 #include <tableView.h>
 #include <core.h>
-
-#define CARD_TITLE_PADDING 2
-#define CARD_VALUE_PADDING 1
-
-#define SCORE_CARD_WIDTH 9
-#define MOVEMENTS_CARD_WIDTH 14
-
-#define RANKING_CARD_WIDTH 24
-#define RANKING_CARD_SCORE_WIDTH 7
 
 void setColorByValue(WINDOW *window, int value)
 {
@@ -92,28 +84,6 @@ void drawTable(WINDOW *window, int table[TABLE_SIZE][TABLE_SIZE])
             drawBlockPiece(window, (c * PIECE_WIDTH), (l * PIECE_HEIGHT), table[l][c]);
         }
     }
-}
-
-void drawInt(WINDOW *window, int value, int x, int y, int width, int padding, int colorPairIndex)
-{
-    int valueMaxLength = width - (padding * 2);
-    wattron(window, COLOR_PAIR(colorPairIndex));
-    wmove(window, y, x);
-    wprintw(window, "%*c%*d%*c", padding, ' ', valueMaxLength, value, padding, ' ');
-}
-
-void drawString(WINDOW *window, char value[], int x, int y, int width, int padding, int colorPairIndex)
-{
-    int valueMaxLength = width - (padding * 2);
-    wattron(window, COLOR_PAIR(colorPairIndex));
-    wmove(window, y, x);
-    wprintw(window, "%*c%*s%*c", padding, ' ', valueMaxLength, value, padding, ' ');
-}
-
-void drawCardInt(WINDOW *window, char title[], int value, int x, int y, int width)
-{
-    drawString(window, title, x, y, width, CARD_TITLE_PADDING, VIEW_COLOR_LIGHT_GREY);
-    drawInt(window, value, x, y + 1, width, CARD_VALUE_PADDING, VIEW_COLOR_GREY);
 }
 
 void drawCardRanking(WINDOW *window, char title[], t_tableData *tableData, int x, int y, int width)

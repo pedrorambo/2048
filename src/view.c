@@ -67,6 +67,28 @@ int getNextKey(WINDOW *window)
     return ch;
 }
 
+void drawInt(WINDOW *window, int value, int x, int y, int width, int padding, int colorPairIndex)
+{
+    int valueMaxLength = width - (padding * 2);
+    wattron(window, COLOR_PAIR(colorPairIndex));
+    wmove(window, y, x);
+    wprintw(window, "%*c%*d%*c", padding, ' ', valueMaxLength, value, padding, ' ');
+}
+
+void drawString(WINDOW *window, char value[], int x, int y, int width, int padding, int colorPairIndex)
+{
+    int valueMaxLength = width - (padding * 2);
+    wattron(window, COLOR_PAIR(colorPairIndex));
+    wmove(window, y, x);
+    wprintw(window, "%*c%*s%*c", padding, ' ', valueMaxLength, value, padding, ' ');
+}
+
+void drawCardInt(WINDOW *window, char title[], int value, int x, int y, int width)
+{
+    drawString(window, title, x, y, width, CARD_TITLE_PADDING, VIEW_COLOR_LIGHT_GREY);
+    drawInt(window, value, x, y + 1, width, CARD_VALUE_PADDING, VIEW_COLOR_GREY);
+}
+
 void destroyView()
 {
     endwin();

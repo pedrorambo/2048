@@ -26,8 +26,14 @@
 #define TABLE_WINDOW_X 0
 #define TABLE_WINDOW_Y 0
 
+#define CARD_TITLE_PADDING 2
+#define CARD_VALUE_PADDING 1
+
 WINDOW *initView();
+int getNextKey(WINDOW *window);
+void drawInt(WINDOW *window, int value, int x, int y, int width, int padding, int colorPairIndex);
+void drawString(WINDOW *window, char value[], int x, int y, int width, int padding, int colorPairIndex);
+void drawCardInt(WINDOW *window, char title[], int value, int x, int y, int width);
 void destroyView();
-int getNextKey(WINDOW *);
 
 #endif
