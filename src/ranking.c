@@ -3,6 +3,7 @@
 #include <ranking.h>
 #include <string.h>
 #include <logFile.h>
+#include <stdlib.h>
 
 int indexOfPlayer(t_tableData *tableData)
 {
@@ -46,8 +47,14 @@ void saveRanking(t_tableData *tableData)
 {
     FILE *file;
     file = fopen(FILE_NAME, "w");
-    fwrite(&(tableData->rankingSize), sizeof(int), 1, file);
-    fwrite(tableData->ranking, sizeof(t_user), tableData->rankingSize, file);
+
+    fprintf(file, "%d\n", tableData->rankingSize);
+
+    for (int i = 0; i < tableData->rankingSize; i++)
+    {
+        fprintf(file, "%d %s\n", tableData->ranking[i].score, tableData->ranking[i].name);
+    }
+
     fflush(file);
     fclose(file);
 }
@@ -60,9 +67,28 @@ void loadRanking(t_tableData *tableData)
 
     if (file != NULL)
     {
-        fread(&rankingSize, sizeof(int), 1, file);
+        fscanf(file, "%d ", &rankingSize);
         t_user ranking[rankingSize];
-        fread(ranking, sizeof(t_user), rankingSize, file);
+
+        for (int i = 0; i < rankingSize; i++)
+        {
+            int score;
+            char name[USERNAME_MAX_LENGTH + 1];
+
+            char *tok;
+            char readString[READ_STRING_SIZE + 1] = {0};
+
+            fgets(readString, READ_STRING_SIZE, file);
+
+            tok = strtok(readString, " ");
+            score = atoi(tok);
+
+            tok = strtok(NULL, " ");
+            ranking[i].score = score;
+            tok[strlen(tok) - 1] = '\0';
+            strcpy(ranking[i].name, tok);
+        }
+
         fclose(file);
 
         tableData->rankingSize = rankingSize;
