@@ -13,11 +13,11 @@ build: src/* src/include/*
 	src/view.c \
 	src/tableView.c \
 	src/ranking.c \
-	src/promptView.c \
 	src/promptRankingView.c \
 	src/rankingView.c \
 	src/logFile.c \
 	src/saveGame.c \
+	src/promptSaveView.c \
 	\
 	-lncurses \
 	-I src/include

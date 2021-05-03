@@ -11,6 +11,7 @@
     "editor.detectIndentation": false,
     "files.associations": {
         "tablelogic.h": "c",
-        "core.h": "c"
+        "core.h": "c",
+        "stdio.h": "c"
     }
 }

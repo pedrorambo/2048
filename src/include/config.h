@@ -8,4 +8,6 @@
 #define USERNAME_MAX_LENGTH 15
 #define RANKING_SIZE 10
 
+#define MAX_FILENAME 15
+
 #endif
