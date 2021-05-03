@@ -2,6 +2,7 @@
 #include <core.h>
 #include <ranking.h>
 #include <string.h>
+#include <logFile.h>
 
 int indexOfPlayer(t_tableData *tableData)
 {
@@ -86,6 +87,7 @@ void addPlayerToRanking(t_tableData *tableData)
     sortRanking(tableData);
 
     playerIndex = indexOfPlayer(tableData);
+
     if (playerIndex >= 0)
     {
         if (tableData->score > tableData->ranking[playerIndex].score)
@@ -94,11 +96,12 @@ void addPlayerToRanking(t_tableData *tableData)
     else
     {
         int rankingIsFull = tableData->rankingSize >= RANKING_SIZE;
+
         if (rankingIsFull)
         {
             if (playerRanked(tableData))
             {
-                int index = tableData->rankingSize;
+                int index = tableData->rankingSize - 1;
                 tableData->ranking[index] = user;
                 tableData->rankingSize = index;
             }
