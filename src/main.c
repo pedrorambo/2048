@@ -90,7 +90,6 @@ int main()
     srand(time(NULL));
     initGame(&tableData);
 
-    // Load ranking
     loadRanking(&tableData);
 
     renderTable(window, &tableData);
@@ -101,7 +100,7 @@ int main()
 
         key = getNextKey(window);
         handleInput(&tableData, key, &currentWindow);
-    } while (key != GAME_KEY_ENTER);
+    } while (key != GAME_KEY_ESC);
 
     destroyView();
     return 0;
