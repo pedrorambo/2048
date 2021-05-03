@@ -19,6 +19,8 @@ build: src/* src/include/*
 	src/saveGame.c \
 	src/promptSaveView.c \
 	src/mainMenu.c \
+	src/promptExitView.c \
+	src/promptNewView.c \
 	\
 	-lncurses -l:libncursesw.a -l:libtinfo.a \
 	-I src/include

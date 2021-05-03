@@ -16,6 +16,8 @@
 #include <promptRankingView.h>
 #include <saveGame.h>
 #include <promptSaveView.h>
+#include <promptExitView.h>
+#include <promptNewView.h>
 
 void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
 {
@@ -33,6 +35,11 @@ void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int cur
     case WINDOW_PROMPT_SAVE:
         renderPromptSave(window, tableData);
         break;
+    case WINDOW_PROMPT_EXIT:
+        renderPromptExit(window);
+        break;
+    case WINDOW_PROMPT_NEW:
+        renderPromptNew(window);
     default:
         break;
     }
@@ -48,30 +55,36 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         switch (key)
         {
         case KEY_DOWN:
-            playDown(tableData);
+            playDown(tableData, 0);
             break;
         case KEY_UP:
-            playUp(tableData);
+            playUp(tableData, 0);
             break;
         case KEY_RIGHT:
-            playRight(tableData);
+            playRight(tableData, 0);
             break;
         case KEY_LEFT:
-            playLeft(tableData);
+            playLeft(tableData, 0);
             break;
         case GAME_KEY_N:
-            flushData(tableData);
-            addInitialPieces(tableData);
-            break;
-        case 'r':
-            *currentWindow = WINDOW_PROMPT_RANKING;
+            *currentWindow = WINDOW_PROMPT_NEW;
             break;
         case GAME_KEY_S:
             *currentWindow = WINDOW_PROMPT_SAVE;
+            break;
+        case GAME_KEY_ESC:
+            *currentWindow = WINDOW_PROMPT_EXIT;
+        default:
+            break;
         }
         break;
     case WINDOW_PROMPT_RANKING:
-        if (key == KEY_BACKSPACE)
+        if (key == KEY_ENTER || key == GAME_KEY_ENTER)
+        {
+            addPlayerToRanking(tableData);
+            *currentWindow = WINDOW_ENDGAME_RANKING;
+        }
+        else if (key == KEY_BACKSPACE)
         {
             tableData->username[strlen(tableData->username) - 1] = '\0';
         }
@@ -79,13 +92,9 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         {
             tableData->username[strlen(tableData->username)] = key;
         }
-        else if (key == KEY_ENTER || key == GAME_KEY_ENTER)
-        {
-            addPlayerToRanking(tableData);
-            *currentWindow = WINDOW_ENDGAME_RANKING;
-        }
         break;
     case WINDOW_ENDGAME_RANKING:
+        tableData->exit = 1;
         break;
     case WINDOW_PROMPT_SAVE:
         if (key == KEY_BACKSPACE)
@@ -99,6 +108,29 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         else if (key == KEY_ENTER || key == GAME_KEY_ENTER)
         {
             saveGame(tableData, tableData->filename);
+            *currentWindow = WINDOW_GAME;
+        }
+        break;
+    case WINDOW_PROMPT_EXIT:
+        if (key == GAME_KEY_S || key == GAME_KEY_S_UPPERCASE)
+        {
+            tableData->exit = TRUE;
+        }
+        else
+        {
+            *currentWindow = WINDOW_GAME;
+        }
+        break;
+    case WINDOW_PROMPT_NEW:
+        if (key == GAME_KEY_S || key == GAME_KEY_S_UPPERCASE)
+        {
+            flushData(tableData);
+            addInitialPieces(tableData);
+            *currentWindow = WINDOW_GAME;
+        }
+        else
+        {
+            *currentWindow = WINDOW_GAME;
         }
         break;
     default:
@@ -124,15 +156,22 @@ int main()
         addInitialPieces(&tableData);
 
     loadRanking(&tableData);
+
+    // tableData.table[0][0] = 1024;
+    // tableData.table[0][1] = 1024;
+
     renderTable(window, &tableData);
 
     do
     {
+        if (tableData.gameFinished)
+            currentWindow = WINDOW_PROMPT_RANKING;
+
         handleWindow(window, &tableData, currentWindow);
 
         key = getNextKey(window);
         handleInput(&tableData, key, &currentWindow);
-    } while (key != GAME_KEY_ESC);
+    } while (!tableData.exit);
 
     destroyView();
     return 0;
