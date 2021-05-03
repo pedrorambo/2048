@@ -18,6 +18,7 @@ typedef struct
     int rankingSize;
     char username[USERNAME_MAX_LENGTH + 1];
     char filename[MAX_FILENAME + 1];
+    int exit;
 } t_tableData;
 
 void playUp(t_tableData *);

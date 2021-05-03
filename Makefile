@@ -18,6 +18,7 @@ build: src/* src/include/*
 	src/logFile.c \
 	src/saveGame.c \
 	src/promptSaveView.c \
+	src/promptExitView.c \
 	\
 	-lncurses -l:libncursesw.a -l:libtinfo.a \
 	-I src/include
