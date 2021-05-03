@@ -52,7 +52,7 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         case KEY_LEFT:
             playLeft(tableData);
             break;
-        case KEY_NEWGAME:
+        case GAME_KEY_N:
             *currentWindow = WINDOW_PROMPT_SAVE;
             break;
         default:
@@ -70,7 +70,7 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         {
             tableData->username[strlen(tableData->username)] = key;
         }
-        else if (key == KEY_ENTER)
+        else if (key == GAME_KEY_ENTER)
         {
             // TODO Update Ranking
         }
@@ -101,7 +101,7 @@ int main()
 
         key = getNextKey(window);
         handleInput(&tableData, key, &currentWindow);
-    } while (key != KEY_ESC);
+    } while (key != GAME_KEY_ENTER);
 
     destroyView();
     return 0;

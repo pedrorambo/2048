@@ -1,8 +1,8 @@
 #ifndef KEYS_H
 #define KEYS_H
 
-#define KEY_ESC 27
-#define KEY_NEWGAME 110
-#define KEY_ENTER 10
+#define GAME_KEY_ESC 27
+#define GAME_KEY_N 110
+#define GAME_KEY_ENTER 10
 
 #endif
