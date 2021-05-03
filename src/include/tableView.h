@@ -17,5 +17,6 @@
 
 void renderTable(WINDOW *window, t_tableData *tableData);
 void drawBlockPiece(WINDOW *window, int y, int x, int value);
+void drawHud(WINDOW *window);
 
 #endif

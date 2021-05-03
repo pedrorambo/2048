@@ -73,7 +73,6 @@ void loadRanking(t_tableData *tableData)
         for (int i = 0; i < rankingSize; i++)
         {
             int score;
-            char name[USERNAME_MAX_LENGTH + 1];
 
             char *tok;
             char readString[READ_STRING_SIZE + 1] = {0};

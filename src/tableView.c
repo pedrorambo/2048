@@ -95,11 +95,19 @@ void drawStats(WINDOW *window, t_tableData *tableData)
     drawCardRanking(window, "Ranking", tableData, tableHorizontalSize + 2, 4, RANKING_CARD_WIDTH);
 }
 
+void drawHud(WINDOW *window)
+{
+    drawString(window, "Comandos", 42, 16, 24, 1, VIEW_COLOR_LIGHT_GREY);
+    drawString(window, "N - Novo Jogo", 42, 17, 24, 1, VIEW_COLOR_GREY);
+    drawString(window, "S - Salvar Jogo", 42, 18, 24, 1, VIEW_COLOR_GREY);
+    drawString(window, "ESC - Sair do Jogo", 42, 19, 24, 1, VIEW_COLOR_GREY);
+}
+
 void renderTable(WINDOW *window, t_tableData *tableData)
 {
     wclear(window);
     drawTable(window, tableData->table);
     drawStats(window, tableData);
-    drawHud(window, tableData);
+    drawHud(window);
     wrefresh(window);
 }
