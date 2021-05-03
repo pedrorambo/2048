@@ -28,5 +28,6 @@ void playLeft(t_tableData *, int);
 void playRight(t_tableData *, int);
 void flushData(t_tableData *tableData);
 void addInitialPieces(t_tableData *tableData);
+void clearFileName(t_tableData *tableData);
 
 #endif

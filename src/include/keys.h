@@ -6,5 +6,6 @@
 #define GAME_KEY_ENTER 10
 #define GAME_KEY_S 's'
 #define GAME_KEY_S_UPPERCASE 'S'
+#define GAME_KEY_C 'c'
 
 #endif

@@ -3,6 +3,14 @@
 #include <core.h>
 #include <logFile.h>
 
+void clearFileName(t_tableData *tableData)
+{
+    for (int i = 0; i < MAX_FILENAME - 1; i++)
+    {
+        tableData->filename[i] = '\0';
+    }
+}
+
 void flushData(t_tableData *tableData)
 {
     for (int l = 0; l < TABLE_SIZE; l++)
@@ -13,6 +21,7 @@ void flushData(t_tableData *tableData)
         }
     }
 
+    clearFileName(tableData);
     tableData->score = 0;
     tableData->movements = 0;
     tableData->gameFinished = 0;

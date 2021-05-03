@@ -12,6 +12,17 @@
     "files.associations": {
         "tablelogic.h": "c",
         "core.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "promptloadview.h": "c",
+        "promptnewview.h": "c",
+        "promptsaveview.h": "c",
+        "savegame.h": "c",
+        "promptrankingview.h": "c",
+        "rankingview.h": "c",
+        "logfile.h": "c",
+        "windows.h": "c",
+        "stdlib.h": "c",
+        "ncurses.h": "c",
+        "inputmanager.h": "c"
     }
 }

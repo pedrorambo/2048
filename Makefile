@@ -21,6 +21,8 @@ build: src/* src/include/*
 	src/mainMenu.c \
 	src/promptExitView.c \
 	src/promptNewView.c \
+	src/promptLoadView.c \
+	src/inputManager.c \
 	\
 	-lncurses -l:libncursesw.a -l:libtinfo.a \
 	-I src/include

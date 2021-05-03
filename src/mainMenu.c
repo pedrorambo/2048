@@ -10,9 +10,9 @@
 void drawMainMenu(WINDOW *window)
 {
     drawString(window, "Novo Jogo", 2, 4, 10, 1, VIEW_COLOR_LIGHT_GREY);
-    drawString(window, "[N]", 2, 5, 11, 1, VIEW_COLOR_GREY);
+    drawString(window, "[n]", 2, 5, 11, 1, VIEW_COLOR_GREY);
     drawString(window, "Carregar Jogo", 32, 4, 10, 1, VIEW_COLOR_LIGHT_GREY);
-    drawString(window, "[S]", 32, 5, 15, 1, VIEW_COLOR_GREY);
+    drawString(window, "[c]", 32, 5, 15, 1, VIEW_COLOR_GREY);
     drawString(window, "Sair do Jogo", 65, 4, 15, 1, VIEW_COLOR_LIGHT_GREY);
     drawString(window, "[ESC]", 65, 5, 15, 1, VIEW_COLOR_GREY);
 }
