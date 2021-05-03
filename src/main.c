@@ -8,7 +8,6 @@
 #include <view.h>
 #include <tableView.h>
 #include <ranking.h>
-#include <promptView.h>
 #include <keys.h>
 #include <windows.h>
 #include <utils.h>
@@ -16,14 +15,12 @@
 #include <logFile.h>
 #include <promptRankingView.h>
 #include <saveGame.h>
+#include <promptSaveView.h>
 
 void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
 {
     switch (currentWindow)
     {
-    case WINDOW_PROMPT_SAVE:
-        renderPrompt(window);
-        break;
     case WINDOW_GAME:
         renderTable(window, tableData);
         break;
@@ -32,6 +29,9 @@ void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int cur
         break;
     case WINDOW_ENDGAME_RANKING:
         renderRankingView(window, tableData);
+        break;
+    case WINDOW_PROMPT_SAVE:
+        renderPromptSave(window, tableData);
         break;
     default:
         break;
@@ -60,14 +60,12 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
             playLeft(tableData);
             break;
         case GAME_KEY_N:
-            *currentWindow = WINDOW_PROMPT_SAVE;
+            flushData(tableData);
+            addInitialPieces(tableData);
             break;
         case GAME_KEY_S:
-            // *currentWindow = WINDOW_PROMPT_RANKING;
-            saveGame(tableData, "output");
+            *currentWindow = WINDOW_PROMPT_SAVE;
         }
-        break;
-    case WINDOW_PROMPT_SAVE:
         break;
     case WINDOW_PROMPT_RANKING:
         if (key == KEY_BACKSPACE)
@@ -85,6 +83,20 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         }
         break;
     case WINDOW_ENDGAME_RANKING:
+        break;
+    case WINDOW_PROMPT_SAVE:
+        if (key == KEY_BACKSPACE)
+        {
+            tableData->filename[strlen(tableData->filename) - 1] = '\0';
+        }
+        else if (keyIsAlphanumerical(key) && strlen(tableData->filename) < MAX_FILENAME - 1)
+        {
+            tableData->filename[strlen(tableData->filename)] = key;
+        }
+        else if (key == KEY_ENTER || key == GAME_KEY_ENTER)
+        {
+            saveGame(tableData, tableData->filename);
+        }
         break;
     default:
         break;
