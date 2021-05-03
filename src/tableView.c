@@ -90,3 +90,9 @@ void renderTable(WINDOW *window, t_tableData *tableData)
     drawTable(window, tableData->table);
     wrefresh(window);
 }
+
+void destroyTable(WINDOW *window)
+{
+    wclear(window);
+    wrefresh(window);
+}

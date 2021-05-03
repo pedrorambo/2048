@@ -14,4 +14,8 @@
 
 void renderTable(WINDOW *, t_tableData *);
 
+void destroyTable(WINDOW*);
+
+void drawBlockPiece(WINDOW *window, int y, int x, int value);
+
 #endif
