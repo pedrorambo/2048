@@ -7,7 +7,7 @@
 #include <tableView.h>
 #include <core.h>
 
-void drawPromptRanking(WINDOW *window, char name[USERNAME_MAX_LENGTH])
+void drawPromptRanking(WINDOW *window, char name[USERNAME_MAX_LENGTH + 1])
 {
     drawString(window, "Voce chegou ao fim do jogo!", 2, 1, 40, 1, VIEW_COLOR_LIGHT_GREY);
     drawString(window, "Informe seu nome para o ranking", 2, 2, 40, 1, VIEW_COLOR_LIGHT_GREY);

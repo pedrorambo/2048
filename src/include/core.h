@@ -6,7 +6,7 @@
 typedef struct
 {
     int score;
-    char name[USERNAME_MAX_LENGTH];
+    char name[USERNAME_MAX_LENGTH + 1];
 } t_user;
 
 typedef struct
@@ -16,7 +16,7 @@ typedef struct
     int movements;
     t_user ranking[RANKING_SIZE];
     int rankingSize;
-    char username[USERNAME_MAX_LENGTH];
+    char username[USERNAME_MAX_LENGTH + 1];
 } t_tableData;
 
 void playUp(t_tableData *);
