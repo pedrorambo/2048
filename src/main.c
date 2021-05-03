@@ -18,11 +18,15 @@
 #include <promptSaveView.h>
 #include <promptExitView.h>
 #include <promptNewView.h>
+#include <mainMenu.h>
 
 void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
 {
     switch (currentWindow)
     {
+    case WINDOW_HOME:
+    renderMainMenu(window);
+        break;
     case WINDOW_GAME:
         renderTable(window, tableData);
         break;
@@ -41,6 +45,7 @@ void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int cur
     case WINDOW_PROMPT_NEW:
         renderPromptNew(window);
     default:
+
         break;
     }
 }
@@ -50,6 +55,19 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
     switch (*currentWindow)
     {
     case WINDOW_HOME:
+                switch (key)
+        {
+        case GAME_KEY_N:
+            *currentWindow = WINDOW_GAME;
+            break;
+        case GAME_KEY_S:
+            *currentWindow = WINDOW_PROMPT_SAVE;
+            break;
+        case GAME_KEY_ESC:
+            tableData->exit = TRUE;
+        default:
+            break;
+        }
         break;
     case WINDOW_GAME:
         switch (key)
@@ -145,7 +163,7 @@ int main()
     t_tableData tableData = {0};
 
     srand(time(NULL));
-    unsigned int currentWindow = WINDOW_GAME;
+    unsigned int currentWindow = WINDOW_HOME;
     WINDOW *window = initView();
     flushData(&tableData);
 
