@@ -2,7 +2,7 @@ build: src/* src/include/*
 	rm -rf build
 	mkdir -p build
 
-	gcc -Wall -Wextra -Wpedantic \
+	gcc -static -Wall -Wextra -Wpedantic \
 	-o build/main \
 	\
 	src/main.c \
@@ -19,7 +19,7 @@ build: src/* src/include/*
 	src/saveGame.c \
 	src/promptSaveView.c \
 	\
-	-lncurses \
+	-lncurses -l:libncursesw.a -l:libtinfo.a \
 	-I src/include
 
 clean:
