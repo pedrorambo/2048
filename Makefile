@@ -3,7 +3,7 @@ build: src/* src/include/*
 	mkdir -p build
 
 	gcc -static -Wall -Wextra -Wpedantic \
-	-o build/main \
+	-o build/2048 \
 	\
 	src/main.c \
 	src/prints.c \

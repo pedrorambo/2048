@@ -2,4 +2,4 @@
 
 make
 
-./build/main
+./build/2048
