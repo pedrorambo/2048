@@ -63,6 +63,9 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
             flushData(tableData);
             addInitialPieces(tableData);
             break;
+        case 'r':
+            *currentWindow = WINDOW_PROMPT_RANKING;
+            break;
         case GAME_KEY_S:
             *currentWindow = WINDOW_PROMPT_SAVE;
         }
