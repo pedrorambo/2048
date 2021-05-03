@@ -28,5 +28,12 @@ void draw2048(WINDOW *window)
     drawString(window, "       /\\\\\\/           \\//\\\\\\    /\\\\\\   \\///////////\\\\\\//   \\//\\\\\\     /\\\\\\ ", 2, 13, 55, 1, VIEW_COLOR_LIGHT_GREY);
     drawString(window, "        /\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \\///\\\\\\\\\\\\\\/              \\/\\\\\\      \\///\\\\\\\\\\\\\\\\\\/", 2, 14, 55, 1, VIEW_COLOR_LIGHT_GREY);
     drawString(window, "        \\///////////////    \\///////                \\///         \\///////// ", 2, 15, 55, 1, VIEW_COLOR_LIGHT_GREY);
-    
+}
+
+void renderMainMenu(WINDOW *window)
+{
+    wclear(window);
+    draw2048(window);
+    drawMainMenu(window);
+    wrefresh(window);
 }

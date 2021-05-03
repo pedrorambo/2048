@@ -15,8 +15,11 @@
 #define SCORE_CARD_WIDTH 9
 #define MOVEMENTS_CARD_WIDTH 14
 
+/*Função para mostrar tabuleiro na tela para o usuário*/
 void renderTable(WINDOW *window, t_tableData *tableData);
+/*Função para criar um bloco gráficamente*/
 void drawBlockPiece(WINDOW *window, int y, int x, int value);
+/*Função para inicializar um quadro com informações do jogo*/
 void drawHud(WINDOW *window);
 
 #endif
