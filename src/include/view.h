@@ -1,5 +1,6 @@
 #include <config.h>
 #include <ncurses.h>
+#include <core.h>
 
 #ifndef VIEW_H
 #define VIEW_H
@@ -29,11 +30,15 @@
 #define CARD_TITLE_PADDING 2
 #define CARD_VALUE_PADDING 1
 
+#define RANKING_CARD_WIDTH 24
+#define RANKING_CARD_SCORE_WIDTH 7
+
 WINDOW *initView();
 int getNextKey(WINDOW *window);
 void drawInt(WINDOW *window, int value, int x, int y, int width, int padding, int colorPairIndex);
 void drawString(WINDOW *window, char value[], int x, int y, int width, int padding, int colorPairIndex);
 void drawCardInt(WINDOW *window, char title[], int value, int x, int y, int width);
 void destroyView();
+void drawCardRanking(WINDOW *window, char title[], t_tableData *tableData, int x, int y, int width);
 
 #endif

@@ -15,6 +15,7 @@ build: src/* src/include/*
 	src/ranking.c \
 	src/promptView.c \
 	src/promptRankingView.c \
+	src/rankingView.c \
 	\
 	-lncurses \
 	-I src/include

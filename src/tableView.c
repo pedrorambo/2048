@@ -86,17 +86,6 @@ void drawTable(WINDOW *window, int table[TABLE_SIZE][TABLE_SIZE])
     }
 }
 
-void drawCardRanking(WINDOW *window, char title[], t_tableData *tableData, int x, int y, int width)
-{
-    drawString(window, title, x, y, width, CARD_TITLE_PADDING, VIEW_COLOR_LIGHT_GREY);
-
-    for (int i = 0; i < tableData->rankingSize; i++)
-    {
-        drawInt(window, tableData->ranking[i].score, x, y + i + 1, RANKING_CARD_SCORE_WIDTH, CARD_VALUE_PADDING, VIEW_COLOR_GREY);
-        drawString(window, tableData->ranking[i].name, x + RANKING_CARD_SCORE_WIDTH, y + i + 1, width - RANKING_CARD_SCORE_WIDTH, CARD_VALUE_PADDING, VIEW_COLOR_GREY);
-    }
-}
-
 void drawStats(WINDOW *window, t_tableData *tableData)
 {
     int tableHorizontalSize = PIECE_WIDTH * TABLE_SIZE;

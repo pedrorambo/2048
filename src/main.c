@@ -12,6 +12,7 @@
 #include <keys.h>
 #include <windows.h>
 #include <utils.h>
+#include <rankingView.h>
 
 void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
 {
@@ -25,6 +26,10 @@ void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int cur
         break;
     case WINDOW_PROMPT_RANKING:
         renderPromptRanking(window, tableData);
+        break;
+    case WINDOW_ENDGAME_RANKING:
+        renderRankingView(window, tableData);
+        break;
     default:
         break;
     }
@@ -70,9 +75,10 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         {
             tableData->username[strlen(tableData->username)] = key;
         }
-        else if (key == GAME_KEY_ENTER)
+        else if (key == KEY_ENTER || key == GAME_KEY_ENTER)
         {
-            // TODO Update Ranking
+            addPlayerToRanking(tableData);
+            currentWindow = WINDOW_ENDGAME_RANKING;
         }
         break;
     default:

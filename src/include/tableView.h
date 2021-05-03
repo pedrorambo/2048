@@ -15,9 +15,6 @@
 #define SCORE_CARD_WIDTH 9
 #define MOVEMENTS_CARD_WIDTH 14
 
-#define RANKING_CARD_WIDTH 24
-#define RANKING_CARD_SCORE_WIDTH 7
-
 void renderTable(WINDOW *window, t_tableData *tableData);
 void drawBlockPiece(WINDOW *window, int y, int x, int value);
 

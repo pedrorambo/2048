@@ -89,6 +89,17 @@ void drawCardInt(WINDOW *window, char title[], int value, int x, int y, int widt
     drawInt(window, value, x, y + 1, width, CARD_VALUE_PADDING, VIEW_COLOR_GREY);
 }
 
+void drawCardRanking(WINDOW *window, char title[], t_tableData *tableData, int x, int y, int width)
+{
+    drawString(window, title, x, y, width, CARD_TITLE_PADDING, VIEW_COLOR_LIGHT_GREY);
+
+    for (int i = 0; i < tableData->rankingSize; i++)
+    {
+        drawInt(window, tableData->ranking[i].score, x, y + i + 1, RANKING_CARD_SCORE_WIDTH, CARD_VALUE_PADDING, VIEW_COLOR_GREY);
+        drawString(window, tableData->ranking[i].name, x + RANKING_CARD_SCORE_WIDTH, y + i + 1, width - RANKING_CARD_SCORE_WIDTH, CARD_VALUE_PADDING, VIEW_COLOR_GREY);
+    }
+}
+
 void destroyView()
 {
     endwin();

@@ -5,5 +5,6 @@
 #define WINDOW_GAME 1
 #define WINDOW_PROMPT_SAVE 2
 #define WINDOW_PROMPT_RANKING 3
+#define WINDOW_ENDGAME_RANKING 4
 
 #endif
