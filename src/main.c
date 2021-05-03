@@ -11,6 +11,7 @@
 #include <promptView.h>
 #include <keys.h>
 #include <windows.h>
+#include <utils.h>
 
 void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
 {
@@ -22,6 +23,8 @@ void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int cur
     case WINDOW_GAME:
         renderTable(window, tableData);
         break;
+    case WINDOW_PROMPT_RANKING:
+        renderPromptRanking(window, tableData);
     default:
         break;
     }
@@ -37,6 +40,7 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         switch (key)
         {
         case KEY_DOWN:
+            *currentWindow = WINDOW_PROMPT_RANKING;
             playDown(tableData);
             break;
         case KEY_UP:
@@ -57,6 +61,20 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
         break;
     case WINDOW_PROMPT_SAVE:
         break;
+    case WINDOW_PROMPT_RANKING:
+        if (key == KEY_BACKSPACE)
+        {
+            tableData->username[strlen(tableData->username) - 1] = '\0';
+        }
+        else if (keyIsAlphanumerical(key) && strlen(tableData->username) < USERNAME_MAX_LENGTH - 1)
+        {
+            tableData->username[strlen(tableData->username)] = key;
+        }
+        else if (key == KEY_ENTER)
+        {
+            // TODO Update Ranking
+        }
+        break;
     default:
         break;
     }
@@ -65,7 +83,7 @@ void handleInput(t_tableData *tableData, const int key, unsigned int *currentWin
 int main(void)
 {
     int key;
-    t_tableData tableData;
+    t_tableData tableData = {0};
     unsigned int currentWindow = WINDOW_GAME;
     WINDOW *window = initView();
 

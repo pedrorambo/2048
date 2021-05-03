@@ -10,3 +10,8 @@ int getRandomBooleanByChance(int chance)
     int randomNumber = getRandomNumber(1, 100);
     return randomNumber <= chance;
 }
+
+int keyIsAlphanumerical(char key)
+{
+    return (key >= 65 && key <= 90) || (key >= 97 && key <= 122);
+}

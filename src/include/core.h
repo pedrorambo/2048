@@ -16,6 +16,7 @@ typedef struct
     int movements;
     t_user ranking[RANKING_SIZE];
     int rankingSize;
+    char username[USERNAME_MAX_LENGTH];
 } t_tableData;
 
 void playUp(t_tableData *);

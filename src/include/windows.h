@@ -4,5 +4,6 @@
 #define WINDOW_HOME 0
 #define WINDOW_GAME 1
 #define WINDOW_PROMPT_SAVE 2
+#define WINDOW_PROMPT_RANKING 3
 
 #endif

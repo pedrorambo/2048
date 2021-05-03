@@ -9,6 +9,7 @@
 
 void drawPrompt(WINDOW *window)
 {
+    drawString(window, "O jogo terminou! Deseja salvá-lo em um arquivo?", 2, 1, 30, 1, VIEW_COLOR_LIGHT_GREY);
     drawString(window, "Desenha salvar o jogo?", 2, 1, 30, 1, VIEW_COLOR_LIGHT_GREY);
     drawString(window, "", 2, 2, 30, 1, VIEW_COLOR_GREY);
 }
