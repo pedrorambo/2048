@@ -18,6 +18,7 @@
 #include <mainMenu.h>
 #include <promptLoadView.h>
 
+/* Gerencia a visualização da janela selecionada */
 void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int currentWindow)
 {
     switch (currentWindow)
@@ -51,6 +52,7 @@ void handleWindow(WINDOW *window, t_tableData *tableData, const unsigned int cur
     }
 }
 
+/* Gerencia os eventos de input na window home */
 void handleWindowHomeInput(t_tableData *tableData, const int key, unsigned int *currentWindow)
 {
     switch (key)
@@ -69,6 +71,7 @@ void handleWindowHomeInput(t_tableData *tableData, const int key, unsigned int *
     }
 }
 
+/* Gerencia os eventos de input na window game */
 void handleWindowGameInput(t_tableData *tableData, const int key, unsigned int *currentWindow)
 {
     switch (key)
@@ -99,6 +102,7 @@ void handleWindowGameInput(t_tableData *tableData, const int key, unsigned int *
     }
 }
 
+/* Gerencia os eventos de input na window prompt ranking */
 void handleWindowPromptRanking(t_tableData *tableData, const int key, unsigned int *currentWindow)
 {
     if (key == KEY_ENTER || key == GAME_KEY_ENTER)
@@ -116,11 +120,13 @@ void handleWindowPromptRanking(t_tableData *tableData, const int key, unsigned i
     }
 }
 
+/* Gerencia os eventos de input na window endgame ranking */
 void handleWindowEndgameRanking(t_tableData *tableData)
 {
     tableData->exit = 1;
 }
 
+/* Gerencia os eventos de input na window prompt save */
 void handleWindowPromptSave(t_tableData *tableData, const int key, unsigned int *currentWindow)
 {
     if (key == KEY_BACKSPACE)
@@ -138,6 +144,7 @@ void handleWindowPromptSave(t_tableData *tableData, const int key, unsigned int 
     }
 }
 
+/* Gerencia os eventos de input na window prompt exit */
 void handleWindowPromptExit(t_tableData *tableData, const int key, unsigned int *currentWindow)
 {
     if (key == GAME_KEY_S || key == GAME_KEY_S_UPPERCASE)
@@ -150,6 +157,7 @@ void handleWindowPromptExit(t_tableData *tableData, const int key, unsigned int 
     }
 }
 
+/* Gerencia os eventos de input na window prompt new */
 void handleWindowPromptNew(t_tableData *tableData, const int key, unsigned int *currentWindow)
 {
     if (key == GAME_KEY_S || key == GAME_KEY_S_UPPERCASE)
@@ -164,6 +172,7 @@ void handleWindowPromptNew(t_tableData *tableData, const int key, unsigned int *
     }
 }
 
+/* Gerencia os eventos de input na window prompt load */
 void handleWindowPromptLoad(t_tableData *tableData, const int key, unsigned int *currentWindow)
 {
     if (key == KEY_BACKSPACE)
@@ -182,6 +191,7 @@ void handleWindowPromptLoad(t_tableData *tableData, const int key, unsigned int 
     }
 }
 
+/* Gerenciar as teclas de acordo com a janela aberta */
 void handleInput(t_tableData *tableData, const int key, unsigned int *currentWindow)
 {
     switch (*currentWindow)

@@ -6,6 +6,7 @@
 #include <core.h>
 #include <view.h>
 
+/* Inicializa as cores e os pares de cores */
 void initColors()
 {
     init_color(VIEW_COLOR_BLACK, 0, 0, 0);
@@ -39,6 +40,7 @@ void initColors()
     init_pair(VIEW_COLOR_GREY, COLOR_WHITE, VIEW_COLOR_GREY);
 }
 
+/*Função para inicializar a interface gráfica*/
 WINDOW *initView()
 {
     WINDOW *window;
@@ -56,17 +58,17 @@ WINDOW *initView()
     return window;
 }
 
+/*Função para obter o input via teclado do usuário*/
 int getNextKey(WINDOW *window)
 {
-    //FIXME Documentar
     keypad(window, TRUE);
     cbreak();
     noecho();
     int ch = wgetch(window);
-
     return ch;
 }
 
+/*Função para desenhar um inteiro com um determinado tamanho e um padding*/
 void drawInt(WINDOW *window, int value, int x, int y, int width, int padding, int colorPairIndex)
 {
     int valueMaxLength = width - (padding * 2);
@@ -75,6 +77,7 @@ void drawInt(WINDOW *window, int value, int x, int y, int width, int padding, in
     wprintw(window, "%*c%*d%*c", padding, ' ', valueMaxLength, value, padding, ' ');
 }
 
+/*Função para desenhar uma string com um determinado tamanho e um padding*/
 void drawString(WINDOW *window, char value[], int x, int y, int width, int padding, int colorPairIndex)
 {
     int valueMaxLength = width - (padding * 2);
@@ -83,12 +86,14 @@ void drawString(WINDOW *window, char value[], int x, int y, int width, int paddi
     wprintw(window, "%*c%*s%*c", padding, ' ', valueMaxLength, value, padding, ' ');
 }
 
+/*Função para desenhar um bloco com cabeçalho com um determinado tamanho e um padding*/
 void drawCardInt(WINDOW *window, char title[], int value, int x, int y, int width)
 {
     drawString(window, title, x, y, width, CARD_TITLE_PADDING, VIEW_COLOR_LIGHT_GREY);
     drawInt(window, value, x, y + 1, width, CARD_VALUE_PADDING, VIEW_COLOR_GREY);
 }
 
+/*Função para desenhar o cabeçalho do ranking*/
 void drawCardRanking(WINDOW *window, char title[], t_tableData *tableData, int x, int y, int width)
 {
     drawString(window, title, x, y, width, CARD_TITLE_PADDING, VIEW_COLOR_LIGHT_GREY);
@@ -100,6 +105,7 @@ void drawCardRanking(WINDOW *window, char title[], t_tableData *tableData, int x
     }
 }
 
+/*Função para desativar a interface gráfica*/
 void destroyView()
 {
     endwin();

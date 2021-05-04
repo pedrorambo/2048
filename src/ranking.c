@@ -2,9 +2,9 @@
 #include <core.h>
 #include <ranking.h>
 #include <string.h>
-#include <logFile.h>
 #include <stdlib.h>
 
+/* Busca a posição de um jogador no ranking. Retorna -1 se não encontrado */
 int indexOfPlayer(t_tableData *tableData)
 {
     for (int i = 0; i < tableData->rankingSize; i++)
@@ -15,6 +15,7 @@ int indexOfPlayer(t_tableData *tableData)
     return -1;
 }
 
+/* Retorna se o jogador deve entrar no ranking */
 int playerRanked(t_tableData *tableData)
 {
     for (int i = 0; i < tableData->rankingSize; i++)
@@ -25,6 +26,7 @@ int playerRanked(t_tableData *tableData)
     return 0;
 }
 
+/* Ordena o ranking */
 void sortRanking(t_tableData *tableData)
 {
     t_user tempUser = {0};
@@ -43,6 +45,7 @@ void sortRanking(t_tableData *tableData)
     }
 }
 
+/* Salva o ranking para um arquivo */
 void saveRanking(t_tableData *tableData)
 {
     FILE *file;
@@ -59,6 +62,7 @@ void saveRanking(t_tableData *tableData)
     fclose(file);
 }
 
+/*Função para carregar ranking salvo em arquivo para o jogo*/
 void loadRanking(t_tableData *tableData)
 {
     FILE *file;
@@ -102,6 +106,7 @@ void loadRanking(t_tableData *tableData)
     tableData->rankingSize = rankingSize;
 }
 
+/*Função para adicionar o jogador ao ranking, caso ele tenha pontuação suficiente*/
 void addPlayerToRanking(t_tableData *tableData)
 {
     int playerIndex = -1;

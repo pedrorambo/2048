@@ -2,10 +2,10 @@
 #include <core.h>
 #include <ranking.h>
 #include <string.h>
-#include <logFile.h>
 #include <saveGame.h>
 #include <tableLogic.h>
 
+/*Função para salvar progresso em um arquivo externo*/
 void saveGame(t_tableData *tableData, char *filename)
 {
     t_saveData saveData = {0};
@@ -20,6 +20,7 @@ void saveGame(t_tableData *tableData, char *filename)
     fclose(file);
 }
 
+/*Função para carregar arquivo com um jogo em progresso*/
 int loadGame(t_tableData *tableData, char *filename)
 {
     t_saveData saveData = {0};

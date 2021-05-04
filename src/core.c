@@ -1,8 +1,8 @@
 #include <config.h>
 #include <tableLogic.h>
 #include <core.h>
-#include <logFile.h>
 
+/*Função para limpar o nome do arquivo*/
 void clearFileName(t_tableData *tableData)
 {
     for (int i = 0; i < MAX_FILENAME - 1; i++)
@@ -11,6 +11,7 @@ void clearFileName(t_tableData *tableData)
     }
 }
 
+/*Função para reinicializar os dados do jogo*/
 void flushData(t_tableData *tableData)
 {
     for (int l = 0; l < TABLE_SIZE; l++)
@@ -27,11 +28,13 @@ void flushData(t_tableData *tableData)
     tableData->gameFinished = 0;
 }
 
+/*Função para adicionar duas peças ao tabuleiro no ínicio do jogo*/
 void addInitialPieces(t_tableData *tableData)
 {
     addInitialPiecesToTable(tableData->table);
 }
 
+/* Verifica se já existe a peça 2048, ou se não existem mais jogadas possíveis */
 int checkGameEnded(t_tableData *tableData)
 {
     t_tableData copyTableData = {0};
@@ -63,6 +66,7 @@ int checkGameEnded(t_tableData *tableData)
     return 0;
 }
 
+/* Aplica a jogada, verificando se houveram alterações */
 void play(t_tableData *tableData, int fake)
 {
     int changed = applyDownMovement(tableData->table, &(tableData->score));
@@ -75,6 +79,7 @@ void play(t_tableData *tableData, int fake)
         tableData->gameFinished = 1;
 }
 
+/*Função para mover as peças para cima*/
 void playUp(t_tableData *tableData, int fake)
 {
     rotateClockwise(tableData->table);
@@ -84,11 +89,13 @@ void playUp(t_tableData *tableData, int fake)
     rotateClockwise(tableData->table);
 }
 
+/*Função para mover as peças para baixo*/
 void playDown(t_tableData *tableData, int fake)
 {
     play(tableData, fake);
 }
 
+/*Função para mover as peças para esquerda*/
 void playLeft(t_tableData *tableData, int fake)
 {
     rotateClockwise(tableData->table);
@@ -98,6 +105,7 @@ void playLeft(t_tableData *tableData, int fake)
     rotateClockwise(tableData->table);
 }
 
+/*Função para mover as peças para direita*/
 void playRight(t_tableData *tableData, int fake)
 {
     rotateClockwise(tableData->table);

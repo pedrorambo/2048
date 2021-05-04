@@ -35,17 +35,23 @@
 
 /*Função para inicializar a interface gráfica*/
 WINDOW *initView();
+
 /*Função para obter o input via teclado do usuário*/
 int getNextKey(WINDOW *window);
+
 /*Função para desenhar um inteiro com um determinado tamanho e um padding*/
 void drawInt(WINDOW *window, int value, int x, int y, int width, int padding, int colorPairIndex);
+
 /*Função para desenhar uma string com um determinado tamanho e um padding*/
 void drawString(WINDOW *window, char value[], int x, int y, int width, int padding, int colorPairIndex);
+
 /*Função para desenhar um bloco com cabeçalho com um determinado tamanho e um padding*/
 void drawCardInt(WINDOW *window, char title[], int value, int x, int y, int width);
-/*Função para desativar a interface gráfica*/
-void destroyView();
+
 /*Função para desenhar o cabeçalho do ranking*/
 void drawCardRanking(WINDOW *window, char title[], t_tableData *tableData, int x, int y, int width);
+
+/*Função para desativar a interface gráfica*/
+void destroyView();
 
 #endif

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <config.h>
 
+/*Função para imprimir a tabela no terminal*/
 void printTable(int table[TABLE_SIZE][TABLE_SIZE])
 {
     for (int l = 0; l < TABLE_SIZE; l++)
@@ -14,6 +15,7 @@ void printTable(int table[TABLE_SIZE][TABLE_SIZE])
     printf("\n");
 }
 
+/*Função para imprimir uma linha no terminal*/
 void printLine(int line[TABLE_SIZE])
 {
     for (int l = 0; l < TABLE_SIZE; l++)

@@ -1,13 +1,9 @@
 #include <math.h>
 #include <config.h>
 #include <utils.h>
+#include <tableLogic.h>
 
-#define INITIAL_PIECES_QUANTITY 2
-#define INITIAL_PIECES_VALUE 2
-
-#define SECONDARY_PIECE_CHANCE 10
-#define SECONDARY_PIECE_VALUE 4
-
+/*Função para obter posições aleatórias do tabuleiro*/
 int getRandomPosition()
 {
     int minValue = 0;
@@ -16,6 +12,7 @@ int getRandomPosition()
     return getRandomNumber(minValue, maxValue);
 }
 
+/*Função para atribuir um valor para uma posição aleatória*/
 void addValueToRandomPositionOnTable(int table[TABLE_SIZE][TABLE_SIZE], int value)
 {
     int isOccupied = 0;
@@ -32,6 +29,7 @@ void addValueToRandomPositionOnTable(int table[TABLE_SIZE][TABLE_SIZE], int valu
     } while (isOccupied);
 }
 
+/*Função para extrair uma linha do tabuleiro*/
 void getTableLine(int line[TABLE_SIZE], int table[TABLE_SIZE][TABLE_SIZE], int lineIndex)
 {
     for (int i = 0; i < TABLE_SIZE; i++)
@@ -40,6 +38,7 @@ void getTableLine(int line[TABLE_SIZE], int table[TABLE_SIZE][TABLE_SIZE], int l
     }
 }
 
+/*Função para aplicar um movimento pra baixo(gravidade) nas peças do tabuleiro, considerando colisões*/
 void applyDownGravity(int table[TABLE_SIZE][TABLE_SIZE])
 {
     for (int l = 1; l < TABLE_SIZE; l++)
@@ -55,6 +54,7 @@ void applyDownGravity(int table[TABLE_SIZE][TABLE_SIZE])
     }
 }
 
+/*Função para copiar um tabuleiro*/
 void copyTable(int incoming[TABLE_SIZE][TABLE_SIZE], int outcoming[TABLE_SIZE][TABLE_SIZE])
 {
     for (int l = 0; l < TABLE_SIZE; l++)
@@ -66,6 +66,7 @@ void copyTable(int incoming[TABLE_SIZE][TABLE_SIZE], int outcoming[TABLE_SIZE][T
     }
 }
 
+/*Função para comparar se houve mudanças entre duas tabelas*/
 int compareTables(int table1[TABLE_SIZE][TABLE_SIZE], int table2[TABLE_SIZE][TABLE_SIZE])
 {
     for (int l = 0; l < TABLE_SIZE; l++)
@@ -81,6 +82,7 @@ int compareTables(int table1[TABLE_SIZE][TABLE_SIZE], int table2[TABLE_SIZE][TAB
     return 0;
 }
 
+/*Função para comparar se é possivel somar os valores das peças, e se possível, aplica a soma e o movimento pra baixo, ignorando colisões*/
 int applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE], int *score)
 {
     int previousTable[TABLE_SIZE][TABLE_SIZE] = {0};
@@ -113,6 +115,7 @@ int applyDownMovement(int table[TABLE_SIZE][TABLE_SIZE], int *score)
     return compareTables(previousTable, table);
 }
 
+/*Função para adicionar duas peças em posições aleatórias no ínicio do jogo*/
 void addInitialPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE])
 {
     for (int i = 0; i < INITIAL_PIECES_QUANTITY; i++)
@@ -121,6 +124,7 @@ void addInitialPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE])
     }
 }
 
+/*Função para adicionar peças ao tabuleiro*/
 void addPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE])
 {
     int pieceValue = INITIAL_PIECES_VALUE;
@@ -129,6 +133,7 @@ void addPiecesToTable(int table[TABLE_SIZE][TABLE_SIZE])
     addValueToRandomPositionOnTable(table, pieceValue);
 }
 
+/*Função para rotacionar o tabuleiro(matriz), no sentido horário em 90 graus*/
 void rotateClockwise(int table[TABLE_SIZE][TABLE_SIZE])
 {
     for (int l = 0; l < TABLE_SIZE / 2; l++)

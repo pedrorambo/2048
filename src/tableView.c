@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <string.h>
-
 #include <config.h>
 #include <tableLogic.h>
 #include <view.h>
 #include <tableView.h>
 #include <core.h>
 
+/* Define a cor de acordo com o número da peça */
 void setColorByValue(WINDOW *window, int value)
 {
     switch (value)
@@ -55,6 +55,7 @@ void setColorByValue(WINDOW *window, int value)
     }
 }
 
+/*Função para criar um bloco gráficamente*/
 void drawBlockPiece(WINDOW *window, int y, int x, int value)
 {
     setColorByValue(window, value);
@@ -75,6 +76,7 @@ void drawBlockPiece(WINDOW *window, int y, int x, int value)
     wprintw(window, "%4d", value);
 }
 
+/* Desenha um tabuleiro */
 void drawTable(WINDOW *window, int table[TABLE_SIZE][TABLE_SIZE])
 {
     for (int l = 0; l < TABLE_SIZE; l++)
@@ -86,6 +88,7 @@ void drawTable(WINDOW *window, int table[TABLE_SIZE][TABLE_SIZE])
     }
 }
 
+/* Desenha o score, movimentos e ranking */
 void drawStats(WINDOW *window, t_tableData *tableData)
 {
     int tableHorizontalSize = PIECE_WIDTH * TABLE_SIZE;
@@ -95,6 +98,7 @@ void drawStats(WINDOW *window, t_tableData *tableData)
     drawCardRanking(window, "Ranking", tableData, tableHorizontalSize + 2, 4, RANKING_CARD_WIDTH);
 }
 
+/*Função para inicializar um quadro com informações do jogo*/
 void drawHud(WINDOW *window)
 {
     drawString(window, "Comandos", 42, 16, 24, 1, VIEW_COLOR_LIGHT_GREY);
@@ -103,6 +107,7 @@ void drawHud(WINDOW *window)
     drawString(window, "ESC - Sair do Jogo", 42, 19, 24, 1, VIEW_COLOR_GREY);
 }
 
+/*Função para mostrar tabuleiro na tela para o usuário*/
 void renderTable(WINDOW *window, t_tableData *tableData)
 {
     wclear(window);

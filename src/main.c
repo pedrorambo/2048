@@ -10,36 +10,40 @@
 
 int main()
 {
+    // Inicializações de tipos
     int key;
     int gameLoaded = 0;
     int once = 0;
     t_tableData tableData = {0};
-
-    srand(time(NULL));
     unsigned int currentWindow = WINDOW_HOME;
     WINDOW *window = initView();
+
+    // Inicializações
+    srand(time(NULL));
     flushData(&tableData);
 
+    // Carrega o jogo salvo
     gameLoaded = loadGame(&tableData, "output");
-
     if (!gameLoaded)
         addInitialPieces(&tableData);
 
+    // Carrega o ranking salvo
     loadRanking(&tableData);
 
-    // tableData.table[0][0] = 1024;
-    // tableData.table[0][1] = 1024;
-
+    // Looping principal do jogo
     do
     {
+        // Verifica se o jogo acabou
         if (tableData.gameFinished && !once)
         {
             currentWindow = WINDOW_PROMPT_RANKING;
             once = 1;
         }
 
+        // Gerencia a janela aberta
         handleWindow(window, &tableData, currentWindow);
 
+        // Gerencia o input do usuário
         key = getNextKey(window);
         handleInput(&tableData, key, &currentWindow);
     } while (!tableData.exit);

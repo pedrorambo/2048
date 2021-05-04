@@ -1,13 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <ncurses.h>
 #include <config.h>
-#include <tableLogic.h>
 #include <view.h>
-#include <tableView.h>
 #include <core.h>
-#include <promptNewView.h>
 
+/*Função para criar prompt para sair do jogo ao usuário*/
 void drawPromptNew(WINDOW *window)
 {
     drawString(window, "Desenha iniciar um novo jogo?", 2, 1, 40, 1, VIEW_COLOR_LIGHT_GREY);
@@ -16,6 +12,7 @@ void drawPromptNew(WINDOW *window)
     drawString(window, "", 2, 4, 40, 1, VIEW_COLOR_GREY);
 }
 
+/*Função para mostrar prompt para sair do jogo ao usuário*/
 void renderPromptNew(WINDOW *window)
 {
     wclear(window);

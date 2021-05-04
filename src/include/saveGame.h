@@ -14,6 +14,7 @@ typedef struct
 
 /*Função para carregar arquivo com um jogo em progresso*/
 int loadGame(t_tableData *tableData, char *filename);
+
 /*Função para salvar progresso em um arquivo externo*/
 void saveGame(t_tableData *tableData, char *filename);
 

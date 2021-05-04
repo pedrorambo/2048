@@ -7,6 +7,7 @@
 #include <tableView.h>
 #include <core.h>
 
+/*Função para criar o menu inicial*/
 void drawMainMenu(WINDOW *window)
 {
     drawString(window, "Novo Jogo", 2, 4, 10, 1, VIEW_COLOR_LIGHT_GREY);
@@ -17,6 +18,7 @@ void drawMainMenu(WINDOW *window)
     drawString(window, "[ESC]", 65, 5, 15, 1, VIEW_COLOR_GREY);
 }
 
+/*Função para criar o logo do jogo*/
 void draw2048(WINDOW *window)
 {
     drawString(window, " /\\\\\\\\\\\\\\\\\\          /\\\\\\\\\\\\\\                /\\\\\\         /\\\\\\\\\\\\\\\\\\        ", 2, 7, 60, 1, VIEW_COLOR_LIGHT_GREY);
@@ -30,6 +32,7 @@ void draw2048(WINDOW *window)
     drawString(window, "        \\///////////////    \\///////                \\///         \\///////// ", 2, 15, 55, 1, VIEW_COLOR_LIGHT_GREY);
 }
 
+/*Função para mostrar o menu principal do jogo*/
 void renderMainMenu(WINDOW *window)
 {
     wclear(window);
